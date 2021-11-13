@@ -71,7 +71,8 @@
                                             <th>Nama</th>
                                             <th>Email</th>
                                             <th>Alamat</th>
-                                            <th>Jenis kelamin</th>                                            
+                                            <th>Jenis kelamin</th>
+                                            <th>QR Code</th>                                            
                                             <th>Aksi</th>                                            
                                         </tr>
                                     </thead>
@@ -81,11 +82,13 @@
                                             <th>Email</th>
                                             <th>Alamat</th>
                                             <th>Jenis kelamin</th>
+                                            <th>QR Code</th>
                                             <th>Aksi</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
                                         <?php foreach ($pengguna as $p) : ?>
+                                            <!-- <?php $kode = 'M'; ?> -->
                                         <tr>
                                             <td><?= $p['username']?></td>                                            
                                             <td><?= $p['email']?></td>                                            
@@ -95,6 +98,7 @@
                                             <?php else : ?>
                                                 <td>Perempuan</td>
                                             <?php endif ?>
+                                            <td><img src="<?php echo base_url('data/ciqrcode/'. $kode=$p['id_users']); ?>" alt=""></td>
                                             <td align ="center"><a href="<?= base_url('data/edit/'. $p['id_users']) ?>" type="button" class="btn btn-warning btn-circle waves-effect waves-circle waves-float"><i class="material-icons">mode_edit</i></a><a href="<?= base_url('data/delete/'. $p['id_users']) ?>" type="button" id="btn-hapus" class="btn btn-danger btn-circle waves-effect waves-circle waves-float"><i class="material-icons">delete</i></a></td>
                                         </tr>
                                         <?php endforeach ?>

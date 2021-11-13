@@ -40,8 +40,12 @@
     <!-- Bootstrap Select Css -->
     <link href="<?= base_url('assets')?>/plugins/bootstrap-select/css/bootstrap-select.css" rel="stylesheet" />
 
+    <!-- Morris Chart Css-->
+    <link href="<?= base_url('assets')?>/plugins/morrisjs/morris.css" rel="stylesheet" />
+
     <!-- Custom Css -->
     <link href="<?= base_url('assets')?>/css/style.css" rel="stylesheet">
+    <link href="<?= base_url('assets')?>/css/fullcalender/main.css" rel="stylesheet">
 
     <!-- AdminBSB Themes. You can choose a theme from css/themes instead of get all themes -->
     <link href="<?= base_url('assets')?>/css/themes/all-themes.css" rel="stylesheet" />
@@ -281,7 +285,18 @@
                             </li>
                         </ul>
                     </li>
-                    
+                    <li>
+                        <a href="<?= base_url('app/pengumuman') ?>">
+                            <i class="material-icons">mail</i>
+                            <span>Pengumuman</span>
+                        </a>
+                    </li>                    
+                    <li>
+                        <a href="<?= base_url('app/pengaturan') ?>">
+                            <i class="material-icons">settings</i>
+                            <span>Pengaturan</span>
+                        </a>
+                    </li>                    
                 </ul>
             </div>
             <!-- #Menu -->
@@ -329,6 +344,10 @@
     <!-- Moment Plugin Js -->
     <script src="<?= base_url('assets')?>/plugins/momentjs/moment.js"></script>
 
+    <!-- Morris Plugin Js -->
+    <script src="<?= base_url('assets')?>/plugins/raphael/raphael.min.js"></script>
+    <script src="<?= base_url('assets')?>/plugins/morrisjs/morris.js"></script>
+
     <!-- Bootstrap Material Datetime Picker Plugin Js -->
     <script src="<?= base_url('assets')?>/plugins/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js"></script>
 
@@ -354,6 +373,36 @@
     <script src="<?= base_url('assets')?>/js/pages/tables/jquery-datatable.js"></script>
     <script src="<?= base_url('assets')?>/js/pages/ui/modals.js"></script>
     <script src="<?= base_url('assets')?>/js/script.js"></script>
+    <script src="<?= base_url('assets')?>/js/fullcalender/main.js"></script>
+
+    <script>
+        $(function () {
+            getMorris('donut', 'donut_chart');
+        });
+
+
+        function getMorris(type, element) {
+            if (type === 'donut') {
+                Morris.Donut({
+                    element: element,
+                    data: [{
+                        label: 'Hadir',
+                        value: <?= $masuk; ?>
+                        }, {
+                            label: 'Sakit',
+                            value: <?= $sakit; ?>
+                        }, {
+                            label: 'Ijin',
+                            value: <?= $ijin; ?>
+                        }],
+                    colors: ['rgb(233, 30, 99)', 'rgb(0, 188, 212)', 'rgb(255, 152, 0)'],
+                    formatter: function (y) {
+                        return y + '%'
+                    }
+                });
+            }
+        }
+    </script>
     
     <!-- Demo Js -->
     <script src="<?= base_url('assets')?>/js/demo.js"></script>

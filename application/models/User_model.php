@@ -60,4 +60,31 @@ class User_model extends CI_Model {
 		$this->db->update('presents', $data, ['user_id' => $id, 'date' => $today]);
 		return $this->db->affected_rows();
 	}
+
+	public function getMasuk()
+	{
+		$this->db->where('user_id', $this->session->userdata('id_users'));
+		$this->db->where('status', 1);
+		$this->db->like('month(presents.date)',ltrim(date('m'),0));
+		$this->db->where('information', 'M');
+		return $this->db->get('presents')->num_rows();
+	}
+
+	public function getSakit($id)
+	{
+		$this->db->where('user_id', $id);
+		$this->db->where('status', 1);
+		$this->db->like('date', date('m'));
+		$this->db->where('information', 'S');
+		return $this->db->get('presents')->num_rows();
+	}
+
+	public function getIjin($id)
+	{
+		$this->db->where('user_id', $id);
+		$this->db->where('status', 1);
+		$this->db->like('date', date('m'));
+		$this->db->where('information', 'I');
+		return $this->db->get('presents')->num_rows();
+	}
 }

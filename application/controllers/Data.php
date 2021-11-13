@@ -8,6 +8,7 @@ class Data extends CI_Controller {
 		parent::__construct();
 		$this->load->model('app_model', 'app');
 		$this->load->model('user_model', 'user');
+        $this->load->library('ciqrcode');
 	}
 
 	public function index()
@@ -19,6 +20,7 @@ class Data extends CI_Controller {
 		$data['pengguna'] = $this->user->getPengguna();
 		$data['page'] = 'admin/master_data/data_pengguna';
 		$data['user'] = $user;
+
 		$this->load->view('template/template', $data);			
 	}
 
@@ -201,5 +203,16 @@ class Data extends CI_Controller {
         $data['page'] = 'admin/master_data/data_siswa';
 		$data['user'] = $user;
 		$this->load->view('template/template', $data);
+    }
+
+    public function ciqrcode($kode)
+    {
+        qrcode::png(
+            $kode,
+            $outfile = false,
+            $level = QR_ECLEVEL_H,
+            $size = 6,
+            $margin = 1
+        );
     }
 }

@@ -17,8 +17,21 @@ class App_model extends CI_Model {
 	{
 		$this->db->insert('positions', $data);
 	}
+
+    public function insertPengumuman($data)
+    {
+        $this->db->insert('pengumuman', $data);
+    }
+
+    public function updatePengumuman($id, $data)
+    {
+        $this->db->update('pengumuman', $data, ['id_pengumuman' => $id]);
+		return $this->db->affected_rows();
+    }
     
     public function getPengumuman() {
+        $this->db->limit(3);
+        $this->db->order_by('id_pengumuman', 'desc');
         return $this->db->get('pengumuman')->result_array();
     }
     
@@ -32,9 +45,9 @@ class App_model extends CI_Model {
 		return $this->db->affected_rows();
 	}
 
-    public function updatePassword($data)
+    public function updatePassword($id, $data)
 	{
-		$this->db->update('users', $data, ['id_users' => 1]);
+		$this->db->update('users', $data, ['id_users' => $id]);
 		return $this->db->affected_rows();
 	}
 
@@ -44,16 +57,33 @@ class App_model extends CI_Model {
 		return $this->db->affected_rows();
 	}
 
+    public function updateJam($id, $data)
+    {
+        $this->db->update('time', $data, ['id_time' => $id]);
+		return $this->db->affected_rows();
+    }
+
     public function deleteUser($id)
 	{
 		$this->db->where('id_users', $id);
       $this->db->delete('users');
 	}
 
+    public function detailPengumuman($id)
+    {
+        return $this->db->get_where('pengumuman', ['id_pengumuman' => $id])->row_array();
+    }
+
     public function deleteKelas($id)
 	{
 		$this->db->where('id_positions', $id);
       $this->db->delete('positions');
+	}
+
+    public function deletePengumuman($id)
+	{
+		$this->db->where('id_pengumuman', $id);
+      $this->db->delete('pengumuman');
 	}
 
     public function updateProfile($id, $data)
@@ -106,6 +136,7 @@ class App_model extends CI_Model {
     $this->db->join('positions', 'positions.id_positions = users.position_id');
     $this->db->join('presents', 'presents.user_id = users.id_users');
     $this->db->where('status', 0);
+    $this->db->limit(5);
     $this->db->order_by('id_presents', 'desc');
     return $this->db->get()->result_array();
    }
@@ -161,7 +192,7 @@ class App_model extends CI_Model {
 		return $this->db->get()->result_array();
 	}
 
-    public function getAbsensisiswa()
+    public function getAbsensisiswa($id)
     {
         $bulan = "m";
         $this->db->join('users', 'users.id_users = presents.user_id');
@@ -170,6 +201,15 @@ class App_model extends CI_Model {
 		$this->db->order_by('id_presents', 'desc');
 		return $this->db->get('presents')->result_array();
     }
+
+    public function getRekapSiswa($id)
+	{
+		$this->db->select('presents.*, count(IF(information = "M", 1, NULL)) as masuk, count(IF(information = "I", 1, NULL)) as ijin, count(IF(information = "S", 1, NULL)) as sakit');
+		$this->db->from('presents');
+		$this->db->where('user_id', $id);
+        $this->db->where('status', 1);
+		return $this->db->get()->result_array();
+	}
 
     public function exportExcel($position, $start, $end)
 	{
@@ -198,4 +238,54 @@ class App_model extends CI_Model {
 		$this->db->order_by('positions.position_name', 'asc');
 		return $this->db->get()->result_array();
     }
+
+    public function exportCetak($position, $start, $end)
+    {
+        $this->db->select('presents.*, users.username, users.nisn, positions.position_name, positions.id_positions, count(IF(information = "M", 1, NULL)) as masuk, count(IF(information = "I", 1, NULL)) as ijin, count(IF(information = "S", 1, NULL)) as sakit');
+		$this->db->from('presents');
+		$this->db->join('users', 'users.id_users = presents.user_id');
+		$this->db->join('positions', 'positions.id_positions = users.position_id');
+        $this->db->where('id_positions', $position);
+        $this->db->where("presents.date BETWEEN '$start' AND '$end'");
+        $this->db->where('status', 1);
+		$this->db->group_by('presents.user_id');
+		$this->db->order_by('positions.position_name', 'asc');
+		return $this->db->get()->result_array();
+    }
+
+    public function getRekapAppMasuk()
+	{
+		$this->db->where('status', 1);
+		$this->db->where('date', date('Y-m-d'));
+		$this->db->where('information', 'M');
+		return $this->db->get('presents')->num_rows();
+	}
+
+    public function getRekapAppSakit()
+	{
+		$this->db->where('status', 1);
+		$this->db->where('date', date('Y-m-d'));
+		$this->db->where('information', 'S');
+		return $this->db->get('presents')->num_rows();
+	}
+
+    public function getRekapAppIjin()
+	{
+		$this->db->where('status', 1);
+		$this->db->where('date', date('Y-m-d'));
+		$this->db->where('information', 'I');
+		return $this->db->get('presents')->num_rows();
+	}
+
+    public function jumlahsiswa()
+    {
+        $this->db->where('role_id', 2);
+		return $this->db->get('users')->num_rows();
+    }
+
+    public function getJam()
+    {
+        return $this->db->get('time')->result_array();
+    }
+
 }

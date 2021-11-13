@@ -33,19 +33,19 @@
                             <i class="material-icons">access_alarm</i>
                         </div>
                         <div class="content">
-                            <div class="text">ALARM</div>
-                            <div class="number">07:00 AM</div>
+                            <div class="text">JAM MASUK</div>
+                            <div class="number"><?= $jammasuk['start'] ?> - <?= $jammasuk['finish'] ?></div>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
                     <div class="info-box-3 bg-cyan hover-zoom-effect">
                         <div class="icon">
-                            <i class="material-icons">gps_fixed</i>
+                            <i class="material-icons">access_alarm</i>
                         </div>
                         <div class="content">
-                            <div class="text">LOCATION</div>
-                            <div class="number">Turkey</div>
+                            <div class="text">JAM KELUAR</div>
+                            <div class="number"><?= $jampulang['start'] ?> - <?= $jampulang['finish'] ?></div>
                         </div>
                     </div>
                 </div>
@@ -76,6 +76,9 @@
                                 <p>User</p>
                                 <?php endif ?>
                             </div>
+                            <div class="profile-footer">
+                                <a href="<?= base_url('user/kartu')?>" class="btn btn-primary btn-lg waves-effect btn-block">CETAK KARTU</a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -90,6 +93,7 @@
                                 </ul>
                                 <div class="tab-content">
                                     <div role="tabpanel" class="tab-pane fade in active" id="home">
+                                        <?php foreach ($pengumuman as $row) : ?>
                                         <div class="panel panel-default panel-post">
                                             <div class="panel-heading">
                                                 <div class="media">
@@ -100,20 +104,21 @@
                                                     </div>
                                                     <div class="media-body">
                                                         <h4 class="media-heading">
-                                                            <a href="#"><?= $user['username']?></a>
+                                                            <a href="#">Administrator</a>
                                                         </h4>
-                                                        Shared publicly - 26 Oct 2018
+                                                        Shared publicly - <?= $row['tanggal'] ?>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="panel-body">
                                                 <div class="post">
                                                     <div class="post-heading">
-                                                        <p>I am a very simple wall post. I am good at containing <a href="#">#small</a> bits of <a href="#">#information</a>. I require little more information to use effectively.</p>
+                                                        <p><?= $row['pengumuman'] ?></p>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
+                                        <?php endforeach ?>
                                     </div>
                                     <div role="tabpanel" class="tab-pane fade in" id="profile_settings">
                                         <?php if($user['role_id']==1) : ?>
@@ -173,7 +178,11 @@
                                         </form>
                                     </div>
                                     <div role="tabpanel" class="tab-pane fade in" id="change_password_settings">
+                                    <?php if($user['role_id']==1) : ?>
                                         <form class="form-horizontal" action="<?= base_url('app/ubah_password') ?>" method="post">
+                                    <?php else : ?>
+                                        <form class="form-horizontal" action="<?= base_url('user/ubah_password') ?>" method="post">
+                                    <?php endif ?>
                                             <div class="form-group">
                                                 <label for="NewPassword" class="col-sm-3 control-label">New Password</label>
                                                 <div class="col-sm-9">
@@ -267,7 +276,7 @@
                 <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
                     <div class="card">
                         <div class="header">
-                            <h2>BROWSER USAGE</h2>
+                            <h2>GRAFIK</h2>
                             <ul class="header-dropdown m-r--5">
                                 <li class="dropdown">
                                     <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
@@ -281,7 +290,7 @@
                                 </li>
                             </ul>
                         </div>
-                        <div class="body">
+                        <div class="body" align="center">
                             <div id="donut_chart" class="dashboard-donut-chart"></div>
                         </div>
                     </div>
@@ -293,8 +302,7 @@
                         <div class="card">
                             <div class="header">
                                 <h2>
-                                    PETA
-                                    <small>Peta lokasi absensi siswa</small>
+                                    KALENDER
                                 </h2>
                                 <ul class="header-dropdown m-r--5">
                                     <li class="dropdown">
@@ -310,7 +318,7 @@
                                 </ul>
                             </div>
                             <div class="body">
-                                <div id="mapid" style="width: 100%; height: 400px;" class="mt-4"></div>
+                                <div id='calendar'></div>
                             </div>
                         </div>
                     </div>
@@ -320,21 +328,16 @@
         </div>
     </section>
 
-    <script>
-        
-    </script>
+    
 
     <script>
-        var mymap = L.map('mapid').setView([-6.6898398, 110.705151], 10);
-        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-		maxZoom: 18,
-		attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, ' +
-			'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-		id: 'mapbox/streets-v11',
-		tileSize: 512,
-		zoomOffset: -1
-        }).addTo(mymap);
-            L.marker([-6.6898398, 110.705151]).addTo(mymap)
-            .bindPopup("<b>MA Walisongo Pecangaan Jepara</b><br />").openPopup();
-    </script>
 
+    document.addEventListener('DOMContentLoaded', function() {
+    var calendarEl = document.getElementById('calendar');
+    var calendar = new FullCalendar.Calendar(calendarEl, {
+        initialView: 'dayGridMonth'
+    });
+    calendar.render();
+    });
+
+    </script>

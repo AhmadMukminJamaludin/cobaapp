@@ -74,27 +74,49 @@
                                 <table class="table table-bordered table-hover js-basic-example dataTable">
                                     <thead class="bg-red">
                                         <tr>
+                                            <th>No</th>
+                                            <th>Foto</th>
+                                            <th>NISN</th>
                                             <th>Nama</th>
                                             <th>Email</th>
                                             <th>Alamat</th>
                                             <th>Jenis kelamin</th>                                            
                                             <th>Kelas</th>
+                                            <th>Kode QR</th>
                                             <th>Aksi</th>                                            
                                         </tr>
                                     </thead>
-                                    <tfoot>
+                                    <tfoot class="bg-red">
                                         <tr>
+                                            <th>No</th>
+                                            <th>Foto</th>
+                                            <th>NISN</th>
                                             <th>Nama</th>
                                             <th>Email</th>
                                             <th>Alamat</th>
                                             <th>Jenis kelamin</th>
                                             <th>Kelas</th>
+                                            <th>Kode QR</th>
                                             <th>Aksi</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
+                                        <?php $no = 1; ?>
                                         <?php foreach ($pengguna as $p) : ?>
                                         <tr>
+                                            <td><?= $no++ ?></td>
+                                            <td>
+                                                <?php if(!empty($p['photo'])) : ?>
+                                                <img src="<?= base_url('image/'. $p['photo'])?>" alt="" width="75px" height="75px" class="gambar">
+                                                <?php else : ?>
+                                                    <?php if ($p['gender']=='L') :?>
+                                                    <img src="<?= base_url('assets/images/male.png')?>" alt="" width="75px" height="75px">
+                                                    <?php else :?>
+                                                    <img src="<?= base_url('assets/images/female.png')?>" alt="" width="75px" height="75px">
+                                                    <?php endif ?>
+                                                <?php endif ?>
+                                            </td>
+                                            <td><?= $p['nisn']?></td>
                                             <td><?= $p['username']?></td>                                            
                                             <td><?= $p['email']?></td>                                            
                                             <td><?= $p['alamat']?></td>
@@ -104,6 +126,7 @@
                                                 <td>Perempuan</td>
                                             <?php endif ?>
                                             <td><?= $p['position_name']?></td>
+                                            <td><img src="<?php echo base_url('data/ciqrcode/'. $kode=$p['id_users']); ?>" alt=""></td>
                                             <td align ="center"><a href="<?= base_url('data/edit/'. $p['id_users']) ?>" type="button" class="btn btn-warning btn-circle waves-effect waves-circle waves-float"><i class="material-icons">mode_edit</i></a><a href="<?= base_url('data/delete/'. $p['id_users']) ?>" type="button" id="btn-hapus" class="btn btn-danger btn-circle waves-effect waves-circle waves-float"><i class="material-icons">delete</i></a></td>
                                         </tr>
                                         <?php endforeach ?>

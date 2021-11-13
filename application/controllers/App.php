@@ -23,6 +23,24 @@ class App extends CI_Controller {
 		$data['page'] = 'app';
 		$data['user'] = $user;
 		$data['pengguna'] = $this->app->pengguna();
+
+		$kalender = array(
+			'start_day' => 'monday',
+			'day_type' => 'short'
+		);
+		$this->load->library('calendar', $kalender);
+		$data['kalender'] = $this->calendar->generate();
+
+		$masuk = $this->app->getRekapAppMasuk();
+		$sakit = $this->app->getRekapAppSakit();
+		$ijin = $this->app->getRekapAppIjin();
+		$jumlah = $this->app->jumlahsiswa();
+		$data['masuk'] = $masuk/$jumlah*100;
+		$data['sakit'] = $sakit/$jumlah*100;
+		$data['ijin'] = $ijin/$jumlah*100;
+
+		$data['jammasuk'] = $this->db->get_where('time', ['id_time' => 1])->row_array();
+		$data['jampulang'] = $this->db->get_where('time', ['id_time' => 2])->row_array();
 		$this->load->view('template/template', $data);
 			
 	}
@@ -101,11 +119,12 @@ class App extends CI_Controller {
 
 			redirect(base_url('app'));
 		}else{
+			$id = $this->session->userdata('id_users');
 			$data = [
 				'password' => hashEncrypt($this->input->post('new_password')),
 			];
 
-			$this->app->updatePassword($data);
+			$this->app->updatePassword($id, $data);
 			$this->session->set_flashdata('message', 'Password berhasil diupdate.');
 
 			redirect(base_url('app'));
@@ -206,6 +225,7 @@ class App extends CI_Controller {
 		$data['absen'] = $this->app->getRekap($position, $start, $end);
 		$data['url_export'] = 'export_excel?position_id='.$position.'&start='.$start.'&end='.$end;
 		$data['url_exportPDF'] = 'export_pdf?position_id='.$position.'&start='.$start.'&end='.$end;
+		$data['url_exportCetak'] = 'export_cetak?position_id='.$position.'&start='.$start.'&end='.$end;
 		$data['user'] = $user;
 		$data['page'] = 'admin/absensi/rekap';
 		$this->load->view('template/template', $data);
@@ -352,6 +372,98 @@ class App extends CI_Controller {
 		$end = $_GET['end'];
 		$data['title'] = 'Ekspor PDF';
 		$data['absen'] = $this->app->exportPDF($position, $start, $end);
-		$this->load->view('admin/absensi/printpdf');
+		$this->load->view('admin/absensi/printpdf', $data);
+	}
+
+	public function export_cetak()
+	{
+		$position = $_GET['position_id'];
+		$start = $_GET['start'];
+		$end = $_GET['end'];
+		$data['absen'] = $this->app->exportCetak($position, $start, $end);
+		$this->load->view('admin/absensi/cetak', $data);
+	}
+
+	public function pengumuman()
+	{
+		$data['title'] = 'Tambah pengumuman';
+		$id = $this->session->userdata('id_users');
+		$user = $this->app->getUser($id);
+		$data['kelas'] = $this->db->get('positions')->result_array();
+		$data['user'] = $user;
+		$data['page'] = 'admin/master_data/add_pengumuman';
+		$data['pengumuman'] = $this->app->getPengumuman();
+		$this->load->view('template/template', $data);
+	}
+
+	public function add_pengumuman()
+	{
+		$this->form_validation->set_rules('pengumuman', 'Pengumuman', 'required',[
+			'required' 	  => 'Pengumuman tidak boleh kosong.'
+		]);
+
+		if($this->form_validation->run() == FALSE){
+			redirect(base_url('app/pengumuman'));
+		}else{
+			$data = [
+				'tanggal' => date('Y-m-d'),
+				'jam'		=> date('H:i:s'),
+				'pengumuman' => $this->input->post('pengumuman')
+			];
+
+			$this->app->insertPengumuman($data);
+			$this->session->set_flashdata('message', 'Pengumuman berhasil ditambahkan.');
+
+			redirect(base_url('app/pengumuman'));
+		}
+	}
+
+	public function update_pengumuman($id)
+	{
+		$id = $this->input->post('id_pengumuman');
+		$data = [
+			'tanggal' => date('Y-m-d'),
+			'jam'		=> date('H:i:s'),
+			'pengumuman' => $this->input->post('pengumuman')
+		];
+
+		$this->app->updatePengumuman($id, $data);
+		$this->session->set_flashdata('message', 'Pengumuman berhasil diubah.');
+
+		redirect(base_url('app/pengumuman'));
+	}
+
+	public function delete_pengumuman($id)
+	{
+		$hapus = $this->app->detailPengumuman($id);
+		$this->app->deletePengumuman($id);
+		$this->session->set_flashdata('message', 'Data kelas berhasil dihapus.');
+        redirect(base_url('app/pengumuman'));
+	}
+
+	public function pengaturan()
+	{
+		$data['title'] = 'Pengaturan';
+		$id = $this->session->userdata('id_users');
+		$user = $this->app->getUser($id);
+		$data['kelas'] = $this->db->get('positions')->result_array();
+		$data['user'] = $user;
+		$data['page'] = 'admin/pengaturan';
+		$data['jam'] = $this->app->getJam();
+		$this->load->view('template/template', $data);
+	}
+
+	public function updatejam($id)
+	{
+		$id = $this->input->post('id_time');
+		$data = [
+			'start' => $this->input->post('start'),
+        	'finish' => $this->input->post('finish')
+		];
+
+		$this->app->updateJam($id, $data);
+		$this->session->set_flashdata('message', 'Jam berhasil diubah.');
+
+		redirect(base_url('app/pengaturan'));
 	}
 }

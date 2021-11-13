@@ -93,7 +93,7 @@
                                 <i class="material-icons">insert_drive_file</i>
                                 <span>PDF</span>
                             </a>                            
-                            <a type="button" href="#" class="btn btn-info waves-effect">
+                            <a type="button" href="<?php echo $url_exportCetak; ?>" class="btn btn-info waves-effect" target="_blank">
                                 <i class="material-icons">print</i>
                                 <span>CETAK</span>
                             </a>                            
