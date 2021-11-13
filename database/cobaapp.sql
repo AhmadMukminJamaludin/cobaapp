@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 07 Nov 2021 pada 17.24
+-- Waktu pembuatan: 13 Nov 2021 pada 12.11
 -- Versi server: 10.4.8-MariaDB
 -- Versi PHP: 7.2.24
 
@@ -40,7 +40,7 @@ CREATE TABLE `pengumuman` (
 --
 
 INSERT INTO `pengumuman` (`id_pengumuman`, `tanggal`, `jam`, `pengumuman`) VALUES
-(1, '2021-09-29', '00:13:15', 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quam possimus saepe doloremque perspiciatis, earum voluptatum maiores numquam, recusandae vitae ipsa obcaecati? Unde dolores repellendus vero, expedita culpa repellat architecto ratione!');
+(6, '2021-11-12', '22:55:27', 'Selamat datang di AbsensiAPP, sebuah aplikasi berbasis web untuk memudahkan pekerjaan anda :)');
 
 -- --------------------------------------------------------
 
@@ -101,7 +101,34 @@ INSERT INTO `presents` (`id_presents`, `user_id`, `date`, `time`, `time_pulang`,
 (40, 149, '2021-11-05', '18:34:12', '19:50:44', 'S', 2, 'sakit', 'coba.pdf', '-7.0051453', '110.4381254'),
 (41, 3, '2021-11-05', '19:47:27', NULL, 'M', 2, '', '', '-7.0051453', '110.4381254'),
 (42, 13, '2021-11-05', '19:59:18', '20:01:21', 'M', 1, '', '', '-7.0051453', '110.4381254'),
-(43, 12, '2021-11-06', '11:04:50', NULL, 'M', 1, '', '', '-7.0051453', '110.4381254');
+(43, 12, '2021-11-06', '11:04:50', NULL, 'M', 1, '', '', '-7.0051453', '110.4381254'),
+(44, 3, '2021-11-09', '18:01:37', NULL, 'M', 1, '', '', '-7.0051453', '110.4381254'),
+(45, 149, '2021-11-09', '19:18:40', NULL, 'S', 2, 'Sakit', 'SURAT_PENUNJUKAN_PEMBIMBING-G_111_18_0014.pdf', '-7.0051453', '110.4381254'),
+(46, 6, '2021-11-09', '20:11:10', '20:14:50', 'M', 1, '', '', '-7.0051453', '110.4381254'),
+(47, 47, '2021-11-10', '15:47:12', '15:47:26', 'M', 1, '', '', '-7.0051453', '110.4381254'),
+(48, 6, '2021-11-11', '12:14:51', '12:15:09', 'M', 1, '', '', '-7.0051453', '110.4381254'),
+(49, 12, '2021-11-11', '19:08:21', NULL, 'S', 1, 'sakit', 'bukti_bayar.pdf', '-7.0051453', '110.4381254');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `time`
+--
+
+CREATE TABLE `time` (
+  `id_time` int(1) NOT NULL,
+  `start` varchar(50) NOT NULL,
+  `finish` varchar(50) NOT NULL,
+  `keterangan` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `time`
+--
+
+INSERT INTO `time` (`id_time`, `start`, `finish`, `keterangan`) VALUES
+(1, '06:00', '07:40', 'Masuk'),
+(2, '14:00', '16:00', 'Pulang');
 
 -- --------------------------------------------------------
 
@@ -127,9 +154,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id_users`, `nisn`, `username`, `email`, `password`, `alamat`, `gender`, `photo`, `role_id`, `position_id`) VALUES
-(1, '', 'Ahmad Mukmin Jamaludin', 'jcfirda@gmail.com', '$2y$10$q5xsLohowHpM9KQTSJRRJ.vJTE5j6cWvHxCjB0SO3SE7wlmdypCta', 'pulodarat', 'L', 'f9049b635d598786c3aebcdd9bf75f04.jpg', 1, 0),
-(3, '3453', 'Najikhatus Salma', 'salma@gmail.com', '$2y$10$m6UCduq.Fj.YmvtqWEQ9uONTtJY4o.1LbF5nuwboeDV432AMt2h6S', 'pulodarat', 'P', 'fd73ff5d3e327ecdc468c049f1748b82.jpg', 2, 2),
-(6, '3454', 'Afsheena Farzana Putri', 'shena@gmail.com', '$2y$10$TsrOBGMFcsq9dFEsEEf.xeZSziPyRu14p56oLqcAr7KpA64JWwNQm', 'Pulodarat', 'P', 'adab212cca3da9ca4d6d5ec172f2ca62.png', 2, 3),
+(1, '', 'Ahmad Mukmin Jamaludin', 'jcfirda@gmail.com', '$2y$10$Qjfox2wsInCd5wwb/..4kuTyiwZ7quWnKtZE1DrKcduslcIVm8v1G', 'pulodarat', 'L', 'f9049b635d598786c3aebcdd9bf75f04.jpg', 1, 0),
+(6, '3454', 'Afsheena Farzana Putri', 'shena@gmail.com', '$2y$10$Fkve2eFSgGJ26ntE0h5cpeTuFh9gRZMSniyPuDuf1I2HttmRz2nGq', 'Pulodarat', 'P', 'adab212cca3da9ca4d6d5ec172f2ca62.png', 2, 3),
 (12, '6364', 'Afwah Mumtazah', '6364@gmail.com', '$2y$10$88A1Vys1W4q7GfJJvacrY.J3BkkL/sWc9I.Bg1mzaXqK2ORDUM/OS', 'Pulodarat', 'P', '', 2, 1),
 (13, '131233200002200001', 'Adinda Maulida', '131233200002200001@gmail.com', '$2y$10$88A1Vys1W4q7GfJJvacrY.J3BkkL/sWc9I.Bg1mzaXqK2ORDUM/OS', '', 'L', '', 2, 8),
 (14, '131233200002200002', 'Alya Alawiyah', '131233200002200002@gmail.com', '$2y$10$88A1Vys1W4q7GfJJvacrY.J3BkkL/sWc9I.Bg1mzaXqK2ORDUM/OS', '', 'L', '', 2, 8),
@@ -277,6 +303,12 @@ ALTER TABLE `presents`
   ADD PRIMARY KEY (`id_presents`);
 
 --
+-- Indeks untuk tabel `time`
+--
+ALTER TABLE `time`
+  ADD PRIMARY KEY (`id_time`);
+
+--
 -- Indeks untuk tabel `users`
 --
 ALTER TABLE `users`
@@ -290,7 +322,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT untuk tabel `pengumuman`
 --
 ALTER TABLE `pengumuman`
-  MODIFY `id_pengumuman` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_pengumuman` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT untuk tabel `positions`
@@ -302,7 +334,13 @@ ALTER TABLE `positions`
 -- AUTO_INCREMENT untuk tabel `presents`
 --
 ALTER TABLE `presents`
-  MODIFY `id_presents` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+  MODIFY `id_presents` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
+
+--
+-- AUTO_INCREMENT untuk tabel `time`
+--
+ALTER TABLE `time`
+  MODIFY `id_time` int(1) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT untuk tabel `users`
