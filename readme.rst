@@ -1,53 +1,31 @@
 ###################
-What is CodeIgniter
+Aplikasi Absensi Online Berbasis Website
 ###################
 
-CodeIgniter is an Application Development Framework - a toolkit - for people
-who build web sites using PHP. Its goal is to enable you to develop projects
-much faster than you could if you were writing code from scratch, by providing
-a rich set of libraries for commonly needed tasks, as well as a simple
-interface and logical structure to access these libraries. CodeIgniter lets
-you creatively focus on your project by minimizing the amount of code needed
-for a given task.
+MA Walisongo Pecangaan Jepara adalah salah satu sekolah yang ingin 
+mengembangkan sistem informasi untuk menangani kegiatan akademik dan 
+administrasi sekolah terutama dalam presensi siswa dengan membangun sebuah 
+sistem informasi presensi berbasis QRCode dan Geolokasi. Penginputan data 
+presensi yang terjadi di MA Walisongo Pecangaan Jepara saat ini masih 
+menggunakan media komunikasi Whatsapp. Hal ini tentunya belum efektif dan 
+efisien karena tidak adanya laporan presensi yang terkomputerisasi dan masih 
+banyak kecurangan pengpresensian yang dilakukan siswa dan dengan dibangunnya 
+sistem informasi presensi berbasis website dengan menggunakan fitur Scan 
+QRCode dan Geolokasi ini dapat meningkatkan efisiensi sebanyak 8% dari sistem 
+sebelumnya, dan berdasarkan survey kepuasan sistem mendapat hasil 88% yang 
+setuju aplikasi ini mampu memberikan kemudahan dalam penginputan dan 
+perekapan presensi. Oleh karena itu berdasarkan pemaparan diatas maka menjadi 
+sebuah inspirasi bagi penulis untuk membuat sistem informasi presensi berbasis 
+web dengan menggunakan fitur Scan QRCode dan Geolokasi, sehingga dengan 
+adanya sistem informasi presensi berbasis website ini diharapkan dapat 
+memudahkan bagi guru walikelas untuk mendapatkan informasi kehadiran siswa.
 
 *******************
-Release Information
+Information
 *******************
 
-This repo contains in-development code for future releases. To download the
-latest stable release please visit the `CodeIgniter Downloads
-<https://codeigniter.com/download>`_ page.
-
-**************************
-Changelog and New Features
-**************************
-
-You can find a list of all changes for each release in the `user
-guide change log <https://github.com/bcit-ci/CodeIgniter/blob/develop/user_guide_src/source/changelog.rst>`_.
-
-*******************
-Server Requirements
-*******************
-
-PHP version 5.6 or newer is recommended.
-
-It should work on 5.3.7 as well, but we strongly advise you NOT to run
-such old versions of PHP, because of potential security and performance
-issues, as well as missing features.
-
-************
-Installation
-************
-
-Please see the `installation section <https://codeigniter.com/user_guide/installation/index.html>`_
-of the CodeIgniter User Guide.
-
-*******
-License
-*******
-
-Please see the `license
-agreement <https://github.com/bcit-ci/CodeIgniter/blob/develop/user_guide_src/source/license.rst>`_.
+Aplikasi berbasis website ini dibangun menggunakan bahasa pemrograman PHP dengan menggunakan Framework Codeigniter 3 dan Template AdminBSB Boostrap
+-  `AHMAD MUKMIN JAMALUDIN`_
 
 *********
 Resources
@@ -62,9 +40,3 @@ Resources
 Report security issues to our `Security Panel <mailto:security@codeigniter.com>`_
 or via our `page on HackerOne <https://hackerone.com/codeigniter>`_, thank you.
 
-***************
-Acknowledgement
-***************
-
-The CodeIgniter team would like to thank EllisLab, all the
-contributors to the CodeIgniter project and you, the CodeIgniter user.
