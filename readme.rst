@@ -24,7 +24,7 @@ memudahkan bagi guru walikelas untuk mendapatkan informasi kehadiran siswa.
 Information
 *******************
 
-Aplikasi berbasis website ini dibangun menggunakan bahasa pemrograman PHP dengan menggunakan Framework Codeigniter 3 dan Template AdminBSB Boostrap
+Aplikasi berbasis website ini dibangun menggunakan bahasa pemrograman PHP dengan menggunakan Framework Codeigniter 3 dan Template AdminBSB Bootstrap
 -  `AHMAD MUKMIN JAMALUDIN`_
 
 *********
