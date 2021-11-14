@@ -72,7 +72,7 @@ class App extends CI_Controller {
 				'gender'	=> $this->input->post('gender'),
 			];
 
-			if(!empty($_FILES['photo'])){
+			if(!empty( $this->input->post('photo'))){
 				$upload 	 = $this->app->uploadImage();
 
 				// Jika upload berhasil
@@ -87,12 +87,7 @@ class App extends CI_Controller {
 					// Timpa data foto dengan nama yg baru
 					$data['photo'] = $upload;
 				}else{
-					$this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">
-					Data profil gagal diubah
-						<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-							<span aria-hidden="true">&times;</span>
-						</button>
-					</div>'); 
+					$this->session->set_flashdata('message', 'Data profil berhasil diubah'); 
 					redirect(base_url("app"));
 				}
 			}
