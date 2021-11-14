@@ -200,6 +200,15 @@ class App_model extends CI_Model {
 		$this->db->like('date', date('m'));
 		$this->db->order_by('id_presents', 'desc');
 		return $this->db->get('presents')->result_array();
+    
+    }
+    public function getEntriSiswa($id)
+    {
+        $this->db->join('users', 'users.id_users = presents.user_id');
+        $this->db->where('user_id', $this->session->userdata('id_users'));
+		$this->db->like('date', date('Y-m-d'));
+		$this->db->order_by('id_presents', 'desc');
+		return $this->db->get('presents')->result_array();
     }
 
     public function getRekapSiswa($id)

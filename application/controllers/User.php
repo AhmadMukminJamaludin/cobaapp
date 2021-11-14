@@ -110,6 +110,7 @@ class User extends CI_Controller {
 		$data['user'] = $user;
 		$data['page'] = 'user/kehadiran/entri';
 		$data['pengguna'] = $this->app->pengguna();
+		$data['absen'] = $this->app->getEntriSiswa($id);
 		$this->load->view('template/templateUser', $data);
 	}
 
@@ -138,7 +139,7 @@ class User extends CI_Controller {
 		} elseif ($this->input->post('tipe')=='P' && $time >= $pulang['finish'] ) {
 			$this->session->set_flashdata('salah', 'Belum saatnya absensi');
 			redirect(base_url('user/entri'));
-		} elseif ($this->input->post('tipe')=='M' && !empty($absen['time'])) {
+		} elseif ($this->input->post('tipe')=='M' && empty($absen['time'])) {
 			date_default_timezone_set('Asia/Jakarta');
 			$data = [
 				'user_id'		=> $this->session->userdata('id_users'),
@@ -156,7 +157,7 @@ class User extends CI_Controller {
 			$this->session->set_flashdata('message', 'Entri absensi berhasil. Silahkan tunggu konfirmasi oleh administator.');
 
 			redirect(base_url('user/entri'));
-		} else ($this->input->post('tipe')=='P' && empty($absen['time'])); {
+		} else ($this->input->post('tipe')=='P' && !empty($absen['time']) && empty($absen['time_pulang'])); {
 			date_default_timezone_set('Asia/Jakarta');
 			$id = $this->session->userdata('id_users');
 			$data = [

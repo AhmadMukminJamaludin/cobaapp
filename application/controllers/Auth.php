@@ -7,6 +7,7 @@ class Auth extends CI_Controller {
 	{
 		parent::__construct();
 		$this->load->model('auth_model', 'auth');
+		$this->load->model('user_model', 'user');
 	}
 	
 	public function index()
@@ -83,6 +84,7 @@ class Auth extends CI_Controller {
 
 	public function input_absensi()
 	{
+		date_default_timezone_set('Asia/Jakarta');
 		$today = date('Y-m-d');
 		$time = date('H:i:s');
 		$masuk = $this->db->get_where('time', ['id_time' => 1])->row_array();
@@ -106,7 +108,7 @@ class Auth extends CI_Controller {
 		} elseif ($this->input->post('tipe')=='P' && $time >= $pulang['finish'] ) {
 			$this->session->set_flashdata('salah', 'Belum saatnya absensi');
 			redirect(base_url('auth/absen_in_auth'));
-		} elseif ($this->input->post('tipe')=='M' && !empty($absen['time'])) {
+		} elseif ($this->input->post('tipe')=='M' && empty($absen['time'])) {
 			date_default_timezone_set('Asia/Jakarta');
 			$data = [
 				'user_id'		=> $this->input->post('qrcode'),
@@ -124,7 +126,7 @@ class Auth extends CI_Controller {
 			$this->session->set_flashdata('message', 'Entri absensi berhasil. Silahkan tunggu konfirmasi oleh administator.');
 
 			redirect(base_url('auth/absen_in_auth'));
-		} else ($this->input->post('tipe')=='P' && empty($absen['time'])); {
+		} else ($this->input->post('tipe')=='P' && !empty($absen['time']) && empty($absen['time_pulang'])); {
 			date_default_timezone_set('Asia/Jakarta');
 			$id = $this->input->post('qrcode');
 			$data = [
