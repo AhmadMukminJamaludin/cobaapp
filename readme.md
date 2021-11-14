@@ -1,6 +1,4 @@
-###################
-Aplikasi Absensi Online Berbasis Website
-###################
+# Aplikasi Absensi Online Berbasis Website
 
 MA Walisongo Pecangaan Jepara adalah salah satu sekolah yang ingin 
 mengembangkan sistem informasi untuk menangani kegiatan akademik dan 
@@ -21,7 +19,7 @@ adanya sistem informasi presensi berbasis website ini diharapkan dapat
 memudahkan bagi guru walikelas untuk mendapatkan informasi kehadiran siswa.
 
 *******************
-Information
+# Information
 *******************
 
 Aplikasi berbasis website ini dibangun menggunakan bahasa pemrograman PHP dengan menggunakan Framework Codeigniter 3 dan Template AdminBSB Bootstrap
@@ -31,7 +29,7 @@ Aplikasi berbasis website ini dibangun menggunakan bahasa pemrograman PHP dengan
 ![localhost_cobaapp_user_entri (1)](https://user-images.githubusercontent.com/93875348/141669890-0626a5c4-cfbe-4d89-ba8c-163a8e5ff78f.png)
 
 *********
-Resources
+# Resources
 *********
 
 -  `User Guide <https://codeigniter.com/docs>`_
