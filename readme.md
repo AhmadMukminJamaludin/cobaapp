@@ -26,7 +26,8 @@ Information
 
 Aplikasi berbasis website ini dibangun menggunakan bahasa pemrograman PHP dengan menggunakan Framework Codeigniter 3 dan Template AdminBSB Bootstrap
 -  `AHMAD MUKMIN JAMALUDIN`_
-
+![localhost_cobaapp_auth_absen_in_auth](https://user-images.githubusercontent.com/93875348/141669985-eb6326ac-e921-4da3-864a-79bcd88355d3.png)
+![localhost_cobaapp_app (1)](https://user-images.githubusercontent.com/93875348/141669992-c273905a-bed0-47e6-8af1-2cc68332a1c7.png)
 ![localhost_cobaapp_user_entri (1)](https://user-images.githubusercontent.com/93875348/141669890-0626a5c4-cfbe-4d89-ba8c-163a8e5ff78f.png)
 
 *********
