@@ -199,10 +199,11 @@ class App extends CI_Controller {
 	{
 		$data['title'] = 'Tabel data absensi';
 		$position = $this->input->get('position_id');
+		$tanggal = $this->input->get('tanggal');
 		$data['kelas'] = $this->db->get('positions')->result_array();
 		$id = $this->session->userdata('id_users');
 		$user = $this->app->getUser($id);
-		$data['absen'] = $this->app->getabsensiperhari($position);
+		$data['absen'] = $this->app->getabsensiperhari($position, $tanggal);
 		$data['user'] = $user;
 		$data['page'] = 'admin/absensi/tabel';
 		$this->load->view('template/template', $data);

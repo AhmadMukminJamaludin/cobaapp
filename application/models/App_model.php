@@ -117,7 +117,9 @@ class App_model extends CI_Model {
     $this->db->from('presents');
       $this->db->join('users', 'users.id_users = presents.user_id');
       $this->db->join('positions', 'positions.id_positions = users.position_id');
-    $this->db->where('id_positions', $position);
+    if (!empty($position)) {
+        $this->db->where('id_positions', $position);
+    }
     $this->db->where('status', 0);
     return $this->db->get()->result_array();
    }
@@ -141,15 +143,22 @@ class App_model extends CI_Model {
     return $this->db->get()->result_array();
    }
 
-   public function getabsensiperhari($position)
+   public function getabsensiperhari($position, $tanggal)
    {
     $format = "Y-m-d";
     $this->db->select('presents.*, users.username, positions.position_name');
     $this->db->from('presents');
     $this->db->join('users', 'users.id_users = presents.user_id');
     $this->db->join('positions', 'positions.id_positions = users.position_id');
-    $this->db->where('presents.date', date($format));
-    $this->db->where('id_positions', $position);
+
+    if(empty($tanggal)) {
+        $this->db->where('presents.date', date($format));
+    }else {
+        $this->db->where('presents.date', date($tanggal));
+    }
+    if (!empty($position)) {
+        $this->db->where('id_positions', $position);
+    }
     $this->db->where('status', 1);
     $this->db->order_by('id_presents', 'desc');
     return $this->db->get()->result_array();

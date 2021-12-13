@@ -5,7 +5,7 @@
                     <div class="card">
                         <div class="header">
                             <h2>
-                                PILIH KELAS
+                                PILIH KELAS DAN TANGGAL
                             </h2>
                             <ul class="header-dropdown m-r--5">
                                 <li class="dropdown">
@@ -25,15 +25,25 @@
                                 <div class="col-md-12">
                                 <form method="get">
                                         <div class="row clearfix">
-                                            <div class="col-lg-7 col-md-3 col-sm-3 col-xs-6">
+                                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
                                             <div class="form-group">
                                                 <select class="form-control show-tick" name="position_id">
-                                                    <option value="">-- Please select --</option>
+                                                    <option value="">-- Pilih kelas --</option>
                                                     <?php foreach($kelas as $kls) : ?>
                                                     <option value="<?= $kls['id_positions']?>"><?= $kls['position_name']?></option>
                                                     <?php endforeach ?>
                                                 </select>
                                             </div>
+                                            </div>
+                                            <div class="col-lg-4 col-md-3 col-sm-3 col-xs-6">
+                                                    <div class="input-group date" id="bs_datepicker_component_container">
+                                                        <div class="form-line">
+                                                            <input type="text" name="tanggal" class="form-control" placeholder="Pilih tanggal...">
+                                                        </div>
+                                                        <span class="input-group-addon">
+                                                            <i class="material-icons">date_range</i>
+                                                        </span>
+                                                    </div>
                                             </div>
                                             <div class="col-lg-5 col-md-6 col-sm-6 col-xs-12">
                                                 <button type="submit" name="preview" class="btn bg-red waves-effect">
@@ -77,6 +87,7 @@
                                             <th>No</th>
                                             <th>Tanggal</th>
                                             <th>Nama</th>
+                                            <th>Kelas</th>
                                             <th>Jam masuk</th>
                                             <th>Jam pulang</th>                                            
                                             <th>Keterangan</th>
@@ -88,7 +99,8 @@
                                         <tr>
                                             <th>No</th>
                                             <th>Tanggal</th>
-                                            <th>Nama</th>   
+                                            <th>Nama</th> 
+                                            <th>Kelas</th>  
                                             <th>Jam masuk</th>
                                             <th>Jam pulang</th>
                                             <th>Keterangan</th>
@@ -103,6 +115,7 @@
                                             <td><?= $no++ ?></td>
                                             <td><?= date('d M Y', strtotime($a['date']))?></td>
                                             <td><?= $a['username']?></td>
+                                            <td><?= $a['position_name']?></td>
                                             <td><?= $a['time']?></td>
                                             <td><?= $a['time_pulang']?></td>
                                             <td align="center"><?php if($a['information'] == 'M') : ?>
