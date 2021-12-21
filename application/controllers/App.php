@@ -143,16 +143,30 @@ class App extends CI_Controller {
 			$data['page'] = 'adduser';
 			$this->load->view('template/template', $data);
 		}else{
-			$data = [
-				'username'		=> $this->input->post('nama'),
-				'nisn'			=> $this->input->post('nisn'),
-				'position_id'	=> $this->input->post('position_id'),
-				'email' 		=> strtolower($this->input->post('email')),
-				'password' 		=> hashEncrypt($this->input->post('password')),
-				'gender'		=> $this->input->post('gender'),
-				'alamat'		=> $this->input->post('alamat'),
-				'role_id' 		=> 2
-			];
+			if ($this->input->post('role_id')==2) {
+				$data = [
+					'username'		=> $this->input->post('nama'),
+					'nisn'			=> $this->input->post('nisn'),
+					'position_id'	=> $this->input->post('position_id'),								
+					'email' 		=> strtolower($this->input->post('email')),
+					'password' 		=> hashEncrypt($this->input->post('password')),
+					'gender'		=> $this->input->post('gender'),
+					'alamat'		=> $this->input->post('alamat'),
+					'role_id' 		=> $this->input->post('role_id')
+				];
+			}else {
+				$data = [
+					'username'		=> $this->input->post('nama'),
+					'nisn'			=> $this->input->post('nisn'),
+					'position_id'	=> 0,								
+					'email' 		=> strtolower($this->input->post('email')),
+					'password' 		=> hashEncrypt($this->input->post('password')),
+					'gender'		=> $this->input->post('gender'),
+					'alamat'		=> $this->input->post('alamat'),
+					'role_id' 		=> $this->input->post('role_id')
+				];
+			};
+			
 			
 			$this->app->insertUser($data);
 			$this->session->set_flashdata('message', 'Data Pengguna berhasil ditambahkan');

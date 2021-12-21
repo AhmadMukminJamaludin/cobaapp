@@ -31,7 +31,7 @@
                                             </div>
                                             <div class="form-group form-float">
                                                 <div class="form-line">
-                                                    <input type="text" class="form-control" name="nisn" required>
+                                                    <input type="text" class="form-control" name="nisn">
                                                     <label class="form-label">NISN</label>
                                                 </div>
                                             </div>
@@ -42,15 +42,24 @@
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <input type="radio" name="gender" id="male" class="with-gap" value="L">
-                                                <label for="male">Laki-laki</label>
+                                                <h2 class="card-inside-title">Jenis kelamin</h2>
+                                                    <input type="radio" name="gender" id="male" class="with-gap" value="L">
+                                                    <label for="male">Laki-laki</label>
 
-                                                <input type="radio" name="gender" id="female" class="with-gap" value="P">
-                                                <label for="female" class="m-l-20">Perempuan</label>
+                                                    <input type="radio" name="gender" id="female" class="with-gap" value="P">
+                                                    <label for="female" class="m-l-20">Perempuan</label>
                                             </div>
                                             <div class="form-group">
-                                                <select class="form-control show-tick" name="position_id">
-                                                    <option value="">-- Please select --</option>
+                                                <h2 class="card-inside-title">Role</h2>
+                                                    <input type="radio" name="role_id" id="admin" class="with-gap" value="1" onclick="disable()">
+                                                    <label for="admin">Administrator/Guru</label>
+
+                                                    <input type="radio" name="role_id" id="siswa" class="with-gap" value="2" onclick="enable()">
+                                                    <label for="siswa" class="m-l-20">Siswa</label>
+                                            </div>
+                                            <div class="form-group">
+                                                <select class="form-control show-tick" name="position_id" id="kelas">
+                                                    <option value="">-- Pilih kelas --</option>
                                                     <?php foreach($kelas as $kls) : ?>
                                                     <option value="<?= $kls['id_positions']?>"><?= $kls['position_name']?></option>
                                                     <?php endforeach ?>
@@ -79,5 +88,10 @@
     </section>
 
     <script>
-
+        function disable() {
+            document.getElementById("kelas").disabled=true;
+        }
+        function enable() {
+            document.getElementById("kelas").disabled=false;
+        }
     </script>

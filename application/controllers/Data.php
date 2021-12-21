@@ -131,7 +131,7 @@ class Data extends CI_Controller {
     {
         $pengguna	= $this->user->detailPengguna($id);
 		$this->app->deleteUser($id);
-		$this->session->set_flashdata('message', 'Data siswa berhasil dihapus.');
+		$this->session->set_flashdata('message', 'Data pengguna berhasil dihapus.');
         redirect(base_url('data'));
     }
 

@@ -11,7 +11,6 @@
                             </h2>
                             <ul class="header-dropdown m-r--5">
                                 <li>
-                                <button type="button" class="btn btn-default waves-effect m-r-20" data-toggle="modal" data-target="#defaultModal">Tambah Kelas</button>
                                     <a href="javascript:void(0);" data-toggle="cardloading" data-loading-effect="pulse">
                                         <i class="material-icons">loop</i>
                                     </a>
@@ -19,11 +18,15 @@
                             </ul>
                         </div>
                         <div class="body">
+                            <div class="m-b-15">
+                                <button type="button" class="btn btn-info btn-lg waves-effect m-r-20" data-toggle="modal" data-target="#defaultModal">Tambah Kelas</button>
+                            </div>
                             <div class="table-responsive">
                                 <table class="table table-bordered table-hover js-basic-example dataTable">
                                     <thead class="bg-red">
                                         <tr>
                                             <th>No</th>
+                                            <th>Id Kelas</th>
                                             <th>Nama Kelas</th>                                            
                                             <th>Aksi</th>                                            
                                         </tr>
@@ -31,6 +34,7 @@
                                     <tfoot>
                                         <tr>
                                             <th>No</th>
+                                            <th>Id Kelas</th>
                                             <th>Nama Kelas</th>                                           
                                             <th>Aksi</th>
                                         </tr>
@@ -40,6 +44,7 @@
                                         <?php foreach($kelas as $kls) : ?>
                                         <tr>
                                             <td><?= $no++ ?></td>
+                                            <td><?= $kls['id_positions']?></td>
                                             <td><?= $kls['position_name']?></td>
                                             <td align="center">
                                             <a href="" class="btn btn-warning btn-circle waves-effect waves-circle waves-float" data-toggle="modal" data-target="#modal<?= $kls['id_positions']?>">
