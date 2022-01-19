@@ -87,4 +87,13 @@ class User_model extends CI_Model {
 		$this->db->where('information', 'I');
 		return $this->db->get('presents')->num_rows();
 	}
+
+	public function getTerlambat($id)
+	{
+		$this->db->where('user_id', $id);
+		$this->db->where('status', 1);
+		$this->db->like('date', date('m'));
+		$this->db->where('information', 'T');
+		return $this->db->get('presents')->num_rows();
+	}
 }

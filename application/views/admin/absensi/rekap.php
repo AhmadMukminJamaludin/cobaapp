@@ -6,7 +6,7 @@
                         <div class="header">
                             <h2>
                                 PILIH KELAS & TANGGAL
-                                <small>Isikan form berikut untuk menampilkan data absensi</small>
+                                <small>Isikan form berikut untuk menampilkan data presensi</small>
                             </h2>
                             <ul class="header-dropdown m-r--5">
                                 <li class="dropdown">
@@ -36,17 +36,33 @@
                                                     </select>
                                                 </div>
                                             </div>
-                                            <div class="col-lg-4 col-md-3 col-sm-3 col-xs-6">
+                                            <div class="col-lg-2 col-md-3 col-sm-3 col-xs-6">
                                                 <div class="form-group">
-                                                    <div class="input-daterange input-group" id="bs_datepicker_range_container">
-                                                        <div class="form-line">
-                                                            <input type="text" name="start" class="form-control" placeholder="Date start...">
-                                                        </div>
-                                                        <span class="input-group-addon">to</span>
-                                                        <div class="form-line">
-                                                            <input type="text" name="end" class="form-control" placeholder="Date end...">
-                                                        </div>
-                                                    </div>
+                                                    <select class="form-control show-tick" name="bulan">
+                                                        <option value="">-- Pilih bulan --</option>
+                                                        <option value="1">Januari</option>
+                                                        <option value="2">Februari</option>
+                                                        <option value="3">Maret</option>
+                                                        <option value="4">April</option>
+                                                        <option value="5">Mei</option>
+                                                        <option value="6">Juni</option>
+                                                        <option value="7">Juli</option>
+                                                        <option value="8">Agustus</option>
+                                                        <option value="9">September</option>
+                                                        <option value="10">Oktober</option>
+                                                        <option value="11">November</option>
+                                                        <option value="12">Desember</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-2 col-md-3 col-sm-3 col-xs-6">
+                                                <div class="form-group">
+                                                    <select class="form-control show-tick" name="tahun">
+                                                        <option value="">-- Pilih tahun --</option>
+                                                        <?php for($i = date('Y'); $i >= (date('Y') - 5); $i--): ?>
+                                                        <option value="<?= $i ?>"><?= $i ?></option>
+                                                    <?php endfor; ?>
+                                                    </select>
                                                 </div>
                                             </div>
                                             <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
@@ -68,7 +84,7 @@
                     <div class="card">
                         <div class="header">
                             <h2>
-                                DATA ABSENSI
+                                DATA PRESENSI
                             </h2>
                             <ul class="header-dropdown m-r--5">
                                 <li class="dropdown">
@@ -109,6 +125,8 @@
                                             <th>Masuk</th>
                                             <th>Sakit</th>
                                             <th>Ijin</th>                                          
+                                            <th>Terlambat</th>                                          
+                                            <th>Tanpa Ket.</th>                                          
                                         </tr>
                                     </thead>
                                     <tfoot>
@@ -120,6 +138,8 @@
                                             <th>Masuk</th>
                                             <th>Sakit</th>
                                             <th>Ijin</th>
+                                            <th>Terlambat</th>
+                                            <th>Tanpa Ket.</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
@@ -133,6 +153,8 @@
                                             <td><?= $a['masuk'] ?></td>
                                             <td><?= $a['sakit'] ?></td>
                                             <td><?= $a['ijin'] ?></td>
+                                            <td><?= $a['terlambat'] ?></td>
+                                            <td><?= ($hari-4)-($a['masuk']-$a['terlambat'])-$a['sakit']-$a['ijin']; ?></td>
                                         </tr>
                                         <?php endforeach ?>
                                     </tbody>

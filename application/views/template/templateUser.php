@@ -42,6 +42,7 @@
 
     <!-- Custom Css -->
     <link href="<?= base_url('assets')?>/css/style.css" rel="stylesheet">
+    <link href="<?= base_url('assets')?>/css/fullcalender/main.css" rel="stylesheet">
 
     <!-- AdminBSB Themes. You can choose a theme from css/themes instead of get all themes -->
     <link href="<?= base_url('assets')?>/css/themes/all-themes.css" rel="stylesheet" />
@@ -90,7 +91,7 @@
             <div class="navbar-header">
                 <a href="javascript:void(0);" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false"></a>
                 <a href="javascript:void(0);" class="bars"></a>
-                <a class="navbar-brand" href="index.php">Absensi<b>APP</b></a>
+                <a class="navbar-brand" href="index.php"><b>P</b>resensi<b>APP</b></a>
             </div>
             <div class="collapse navbar-collapse" id="navbar-collapse">
                 <ul class="nav navbar-nav navbar-right">
@@ -137,13 +138,13 @@
                     <li>
                         <a href="<?= base_url('user/entri')?>">
                             <i class="material-icons">work</i>
-                            <span>Entri absensi</span>
+                            <span>Entri presensi</span>
                         </a>
                     </li>
                     <li>
                         <a href="<?= base_url('user/tabel_absensisiswa')?>">
                             <i class="material-icons">date_range</i>
-                            <span>Data Absensi</span>
+                            <span>Data presensi</span>
                         </a>
                     </li>
                                         
@@ -218,6 +219,7 @@
     <script src="<?= base_url('assets')?>/js/pages/ui/sweetalert.js"></script>
     <script src="<?= base_url('assets')?>/js/pages/tables/jquery-datatable.js"></script>
     <script src="<?= base_url('assets')?>/js/pages/ui/modals.js"></script>
+    <script src="<?= base_url('assets')?>/js/fullcalender/main.js"></script>
     
     <!-- Demo Js -->
     <script src="<?= base_url('assets')?>/js/demo.js"></script>

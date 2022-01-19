@@ -31,8 +31,8 @@
 <body class="login-page">
     <div class="login-box">
         <div class="logo">
-            <a href="javascript:void(0);">Absensi<b>APP</b></a>
-            <small>Aplikasi absensi online berbasis website </small>
+            <a href="javascript:void(0);"> <b>P</b>resensi<b>APP</b></a>
+            <small>Aplikasi presensi online berbasis website </small>
         </div>
         <div class="card">
             <div class="body">
@@ -44,7 +44,7 @@
                             <i class="material-icons">person</i>
                         </span>
                         <div class="form-line">
-                            <input type="email" class="form-control" name="email" placeholder="email" required autofocus>
+                            <input type="email" class="form-control" name="email" placeholder="Masukkan email..." required autofocus>
                         </div>
                     </div>
                     <div class="input-group">
@@ -52,26 +52,18 @@
                             <i class="material-icons">lock</i>
                         </span>
                         <div class="form-line">
-                            <input type="password" class="form-control" name="password" placeholder="Password" required>
+                            <input type="password" class="form-control" name="password" placeholder="Masukkan password..." required>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-xs-8 p-t-5">
-                            <input type="checkbox" name="rememberme" id="rememberme" class="filled-in chk-col-pink">
-                            <label for="rememberme">Remember Me</label>
-                        </div>
-                        
-                        <div class="col-xs-4">
-                            <button class="btn btn-block bg-indigo waves-effect" type="submit">SIGN IN</button>
+                    <div class="row">                        
+                        <div class="col-lg-12">
+                            <button class="btn btn-block btn-lg bg-indigo waves-effect" type="submit">SIGN IN</button>
                         </div>
                     </div>
                     <div class="row m-t-15 m-b--20">
                         <div class="col-xs-6">
-                                <a href="<?= base_url('auth/absen_in_auth')?>">Entri Absensi!</a>
+                                <a href="<?= base_url('auth/absen_in_auth')?>">Entri Presensi!</a>
                             </div>
-                        <div class="col-xs-6 align-right">
-                            <a href="#">Forgot Password?</a>
-                        </div>
                     </div>
                 </form>
             </div>

@@ -94,7 +94,7 @@
             <div class="navbar-header">
                 <a href="javascript:void(0);" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false"></a>
                 <a href="javascript:void(0);" class="bars"></a>
-                <a class="navbar-brand" href="index.php">Absensi<b>APP</b></a>
+                <a class="navbar-brand" href="index.php"><b>P</b>resensi<b>APP</b></a>
             </div>
             <div class="collapse navbar-collapse" id="navbar-collapse">
                 <ul class="nav navbar-nav navbar-right">
@@ -275,13 +275,13 @@
                     <li>
                         <a class="menu-toggle">
                             <i class="material-icons">insert_invitation</i>
-                            <span>Absensi</span>
+                            <span>Presensi</span>
                         </a>
                         <ul class="ml-menu">
                             <li>
-                                <a href="<?= base_url('app/tabel_konfirmasi')?>">Konfirmasi Absensi</a>
-                                <a href="<?= base_url('app/tabel_absensi')?>">Data Absensi</a>
-                                <a href="<?= base_url('app/tabel_rekap')?>">Rekap Absensi</a>
+                                <a href="<?= base_url('app/tabel_konfirmasi')?>">Konfirmasi Presensi</a>
+                                <a href="<?= base_url('app/tabel_absensi')?>">Data Presensi</a>
+                                <a href="<?= base_url('app/tabel_rekap')?>">Rekap Presensi</a>
                             </li>
                         </ul>
                     </li>

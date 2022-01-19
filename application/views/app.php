@@ -22,7 +22,7 @@
                             <i class="material-icons">devices</i>
                         </div>
                         <div class="content">
-                            <div class="text">KONFIRMASI ABSENSI</div>
+                            <div class="text">KONFIRMASI PRESENSI</div>
                             <div class="number"><?php echo $jmlabsen; ?></div>
                         </div>
                     </div>
@@ -69,7 +69,7 @@
                             </div>
                             <div class="content-area">
                                 <h3><?= $user['username']?></h3>
-                                <p>MA Walisongo Pecangaan</p>
+                                <p>MA Walisongo Pecangaan Jepara</p>
                                 <?php if($user['role_id']==1) : ?>
                                 <p>Administrator</p>
                                 <?php else : ?>
@@ -221,8 +221,8 @@
                 <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
                     <div class="card">
                         <div class="header">
-                            <h2>DATA ABSENSI</h2>
-                            <small>Tabel absensi siswa yang belum dikonfirmasi</small>
+                            <h2>DATA PRESENSI</h2>
+                            <small>Tabel presensi siswa yang belum dikonfirmasi</small>
                             <ul class="header-dropdown m-r--5">
                                 <li class="dropdown">
                                     <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
@@ -262,6 +262,8 @@
                                                 <div class="label label-danger">Ijin</div>
                                             <?php elseif($a['information'] == 'S') : ?>
                                                 <div class="label label-danger">Sakit</div>
+                                            <?php elseif($a['information'] == 'T') : ?>
+                                                <div class="label label-warning">Terlambat</div>
                                             <?php endif ?></td>
                                         </tr>
                                         <?php endforeach ?>

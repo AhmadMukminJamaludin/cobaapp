@@ -59,6 +59,8 @@
                         <th>Masuk</th>
                         <th>Sakit</th>
                         <th>Ijin</th>                                          
+                        <th>Terlambat</th>                                          
+                        <th>Tanpa Keterangan</th>                                          
                     </tr>
                 </thead>
                 <tbody>
@@ -72,6 +74,8 @@
                         <td><?= $a['masuk'] ?></td>
                         <td><?= $a['sakit'] ?></td>
                         <td><?= $a['ijin'] ?></td>
+                        <td><?= $a['terlambat'] ?></td>
+                        <td><?= ($hari-4)-($a['masuk']-$a['terlambat'])-$a['sakit']-$a['ijin']; ?></td>
                     </tr>
                     <?php endforeach ?>
                 </tbody>

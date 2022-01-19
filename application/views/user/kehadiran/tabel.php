@@ -6,7 +6,7 @@
                     <div class="card">
                         <div class="header">
                             <h2>
-                                DATA ABSENSI
+                                DATA PRESENSI
                             </h2>
                             <ul class="header-dropdown m-r--5">
                                 <li class="dropdown">
@@ -56,17 +56,21 @@
                                                 <td><?= $a['username']?></td>
                                                 <td><?= $a['time']?></td>
                                                 <td><?= $a['time_pulang']?></td>
-                                                <td align="center"><?php if($a['information'] == 'M'){print '<div class="label label-info">Masuk</div>';}
-                                                elseif($a['information'] == 'S'){print '<div class="label label-danger">Sakit</div>';}
-                                                else {print '<div class="label label-danger">Ijin</div>';}?> <?php if($a['status'] == 0){print '<div class="label label-default">Menunggu dikonfirmasi...</div>';}
-                                                elseif($a['status'] == 1){print '<div class="label label-success">Dikonfirmasi</div>';}
-                                                else {print '<div class="label label-danger">Ditolak</div>';}?>
+                                                <td align="center"><?php if($a['information'] == 'M') : ?>
+											<span class="label label-primary">Masuk</span>
+                                            <?php elseif($a['information'] == 'P') : ?>
+                                                <div class="label label-warning">Pulang</div>
+                                            <?php elseif($a['information'] == 'I') : ?>
+                                                <div class="label label-danger">Ijin</div>
+                                            <?php elseif($a['information'] == 'S') : ?>
+                                                <div class="label label-danger">Sakit</div>
+                                            <?php elseif($a['information'] == 'T') : ?>
+                                                <div class="label label-warning">Terlambat</div>
+                                            <?php endif ?> 
                                                 </td>
-                                                <td align="center"><?php if($a['time'] >= date(14,24)){ 
-                                                print '<div class="label label-danger">terlambat</div>'; 
-                                                } else {
-                                                    print '<div class="label label-success">tepat waktu</div>';
-                                                }?></td>
+                                                <td align="center"><?php if($a['status'] == 0){print '<div class="label label-default">Menunggu dikonfirmasi...</div>';}
+                                                elseif($a['status'] == 1){print '<div class="label label-success">Dikonfirmasi</div>';}
+                                                else {print '<div class="label label-danger">Ditolak</div>';}?></td>
                                             </tr>
                                         <?php endforeach ?>
                                     </tbody>
@@ -83,8 +87,7 @@
                     <div class="card">
                         <div class="header">
                             <h2>
-                                REKAP DATA ABSENSI
-                                <small>bulan : <?= date('M'); ?></small>
+                                REKAP DATA PRESENSI
                             </h2>
                             <ul class="header-dropdown m-r--5">
                                 <li class="dropdown">
@@ -121,9 +124,37 @@
                                             <td>Ijin</td>
                                             <td><?= $ijin ?></td>
                                         </tr>
+                                        <tr>
+                                            <td>Terlambat</td>
+                                            <td><?= $terlambat ?></td>
+                                        </tr>
                                     </tbody>
                                 </table>
                             </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-8 col-md-12 col-sm-12 col-xs-12">
+                    <div class="card">
+                        <div class="header">
+                            <h2>
+                                KALENDER PRESENSI
+                            </h2>
+                            <ul class="header-dropdown m-r--5">
+                                <li class="dropdown">
+                                    <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                        <i class="material-icons">more_vert</i>
+                                    </a>
+                                    <ul class="dropdown-menu pull-right">
+                                        <li><a href="javascript:void(0);">Action</a></li>
+                                        <li><a href="javascript:void(0);">Another action</a></li>
+                                        <li><a href="javascript:void(0);">Something else here</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="body">   
+                            <div id='calendar'></div>
                         </div>
                     </div>
                 </div>
@@ -132,3 +163,15 @@
         </div>
     </section>
     
+    <script>
+
+    document.addEventListener('DOMContentLoaded', function() {
+    var calendarEl = document.getElementById('calendar');
+    var calendar = new FullCalendar.Calendar(calendarEl, {
+        initialView: 'dayGridMonth',
+        events: "<?php echo base_url(); ?>user/fullcalender_load"
+    });
+    calendar.render();
+    });
+
+    </script>

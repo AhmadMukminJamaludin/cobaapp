@@ -86,7 +86,7 @@ table td p {
         <tr>
           <th align="center" style="line-height: 5%;">
             <div style="vertical-align: middle;">
-              <h2>REKAPITULASI ABSENSI SISWA</h2>
+              <h2>REKAPITULASI PRESENSI SISWA</h2>
             </div>
           </th>
         </tr>
@@ -107,6 +107,8 @@ table td p {
                                 <td align="center" width="40px;">Hadir</td>
                                 <td align="center" width="40px;">Sakit</td>
                                 <td align="center" width="40px;">Ijin</td>
+                                <td align="center" width="40px;">Terlambat</td>
+                                <td align="center" width="40px;">Tanpa Ket.</td>
                             </tr>';
                             $no = 1 ;
                             foreach ($absen as $data) {
@@ -117,6 +119,8 @@ table td p {
                             <td align="center">'.$data['masuk'].'</td>
                             <td align="center">'.$data['sakit'].'</td>
                             <td align="center">'.$data['ijin'].'</td>
+                            <td align="center">'.$data['terlambat'].'</td>
+                            <td align="center">'.(($hari-'4')-(($data['masuk']-$data['terlambat'])-$data['sakit']-$data['ijin'])).'</td>
                             </tr>';}
                             $tabelJadwal .= '</table>';
     $pdf->writeHTML($tabelJadwal, true, false, false, false, '');

@@ -186,15 +186,16 @@ class App_model extends CI_Model {
       return $this->db->get()->result_array();
     }
 
-    public function getRekap($position, $start, $end)
+    public function getRekap($position, $bulan, $tahun)
 	{
         // SELECT `presents`.*, `users`.`username`, `users`.`nisn`, `positions`.`position_name`, `positions`.`id_positions`, count(IF(information = "M", 1, NULL)) as masuk, count(IF(information = "I", 1, NULL)) as ijin, count(IF(information = "S", 1, NULL)) as sakit FROM `presents` JOIN `users` ON `users`.`id_users` = `presents`.`user_id` JOIN `positions` ON `positions`.`id_positions` = `users`.`position_id` WHERE `id_positions` IS NULL AND `presents`.`date` BETWEEN '' AND '' AND `status` = 1 GROUP BY `presents`.`user_id` ORDER BY `positions`.`position_name` ASC
-		$this->db->select('presents.*, users.username, users.nisn, positions.position_name, positions.id_positions, count(IF(information = "M", 1, NULL)) as masuk, count(IF(information = "I", 1, NULL)) as ijin, count(IF(information = "S", 1, NULL)) as sakit');
+		$this->db->select('presents.*, users.username, users.nisn, positions.position_name, positions.id_positions, count(IF(information = "M", 1, NULL)) as masuk, count(IF(information = "I", 1, NULL)) as ijin, count(IF(information = "S", 1, NULL)) as sakit, count(IF(information = "T", 1, NULL)) as terlambat');
 		$this->db->from('presents');
 		$this->db->join('users', 'users.id_users = presents.user_id');
 		$this->db->join('positions', 'positions.id_positions = users.position_id');
 		$this->db->where('id_positions', $position);
-        $this->db->where("presents.date BETWEEN '$start' AND '$end'");
+        $this->db->where('month(presents.date)',ltrim(date($bulan),0));
+        $this->db->where('year(presents.date)',ltrim(date($tahun),0));
         $this->db->where('status', 1);
 		$this->db->group_by('presents.user_id');
 		$this->db->order_by('positions.position_name', 'asc');
@@ -206,7 +207,6 @@ class App_model extends CI_Model {
         $bulan = "m";
         $this->db->join('users', 'users.id_users = presents.user_id');
         $this->db->where('user_id', $this->session->userdata('id_users'));
-		$this->db->like('date', date('m'));
 		$this->db->order_by('id_presents', 'desc');
 		return $this->db->get('presents')->result_array();
     
@@ -229,42 +229,45 @@ class App_model extends CI_Model {
 		return $this->db->get()->result_array();
 	}
 
-    public function exportExcel($position, $start, $end)
+    public function exportExcel($position, $bulan, $tahun)
 	{
-		$this->db->select('presents.*, users.username, users.nisn, positions.position_name, positions.id_positions, count(IF(information = "M", 1, NULL)) as masuk, count(IF(information = "I", 1, NULL)) as ijin, count(IF(information = "S", 1, NULL)) as sakit');
+		$this->db->select('presents.*, users.username, users.nisn, positions.position_name, positions.id_positions, count(IF(information = "M", 1, NULL)) as masuk, count(IF(information = "I", 1, NULL)) as ijin, count(IF(information = "S", 1, NULL)) as sakit, count(IF(information = "T", 1, NULL)) as terlambat');
 		$this->db->from('presents');
 		$this->db->join('users', 'users.id_users = presents.user_id');
 		$this->db->join('positions', 'positions.id_positions = users.position_id');
         $this->db->where('id_positions', $position);
-        $this->db->where("presents.date BETWEEN '$start' AND '$end'");
+        $this->db->where('month(presents.date)',ltrim(date($bulan),0));
+        $this->db->where('year(presents.date)',ltrim(date($tahun),0));
         $this->db->where('status', 1);
 		$this->db->group_by('presents.user_id');
 		$this->db->order_by('positions.position_name', 'asc');
 		return $this->db->get()->result_array();
 	}
 
-    public function exportPDF($position, $start, $end)
+    public function exportPDF($position, $bulan, $tahun)
     {
-        $this->db->select('presents.*, users.username, users.nisn, positions.position_name, positions.id_positions, count(IF(information = "M", 1, NULL)) as masuk, count(IF(information = "I", 1, NULL)) as ijin, count(IF(information = "S", 1, NULL)) as sakit');
+        $this->db->select('presents.*, users.username, users.nisn, positions.position_name, positions.id_positions, count(IF(information = "M", 1, NULL)) as masuk, count(IF(information = "I", 1, NULL)) as ijin, count(IF(information = "S", 1, NULL)) as sakit, count(IF(information = "T", 1, NULL)) as terlambat');
 		$this->db->from('presents');
 		$this->db->join('users', 'users.id_users = presents.user_id');
 		$this->db->join('positions', 'positions.id_positions = users.position_id');
         $this->db->where('id_positions', $position);
-        $this->db->where("presents.date BETWEEN '$start' AND '$end'");
+        $this->db->where('month(presents.date)',ltrim(date($bulan),0));
+        $this->db->where('year(presents.date)',ltrim(date($tahun),0));
         $this->db->where('status', 1);
 		$this->db->group_by('presents.user_id');
 		$this->db->order_by('positions.position_name', 'asc');
 		return $this->db->get()->result_array();
     }
 
-    public function exportCetak($position, $start, $end)
+    public function exportCetak($position, $bulan, $tahun)
     {
-        $this->db->select('presents.*, users.username, users.nisn, positions.position_name, positions.id_positions, count(IF(information = "M", 1, NULL)) as masuk, count(IF(information = "I", 1, NULL)) as ijin, count(IF(information = "S", 1, NULL)) as sakit');
+        $this->db->select('presents.*, users.username, users.nisn, positions.position_name, positions.id_positions, count(IF(information = "M", 1, NULL)) as masuk, count(IF(information = "I", 1, NULL)) as ijin, count(IF(information = "S", 1, NULL)) as sakit, count(IF(information = "T", 1, NULL)) as terlambat');
 		$this->db->from('presents');
 		$this->db->join('users', 'users.id_users = presents.user_id');
 		$this->db->join('positions', 'positions.id_positions = users.position_id');
         $this->db->where('id_positions', $position);
-        $this->db->where("presents.date BETWEEN '$start' AND '$end'");
+        $this->db->where('month(presents.date)',ltrim(date($bulan),0));
+        $this->db->where('year(presents.date)',ltrim(date($tahun),0));
         $this->db->where('status', 1);
 		$this->db->group_by('presents.user_id');
 		$this->db->order_by('positions.position_name', 'asc');

@@ -6,7 +6,7 @@
                     <div class="card">
                         <div class="header">
                             <h2>
-                                ENTRI ABSENSI
+                                ENTRI PRESENSI
                             </h2>
                             <ul class="header-dropdown m-r--5">
                                 <li class="dropdown">
@@ -53,7 +53,7 @@
                     <div class="card">
                         <div class="header">
                             <h2>
-                                DATA ABSENSI
+                                DATA PRESENSI
                             </h2>
                             <ul class="header-dropdown m-r--5">
                                 <li class="dropdown">
@@ -95,6 +95,8 @@
                                                 <div class="label label-danger">Ijin</div>
                                             <?php elseif($a['information'] == 'S') : ?>
                                                 <div class="label label-danger">Sakit</div>
+                                            <?php elseif($a['information'] == 'T') : ?>
+                                                <div class="label label-warning">Terlambat</div>
                                             <?php endif ?></td>
                                             <td><?php if($a['status'] == 0) : ?>
 											<span class="label label-default">Belum dikonfirmasi</span>

@@ -91,22 +91,36 @@ class Auth extends CI_Controller {
 		$pulang = $this->db->get_where('time', ['id_time' => 2])->row_array();
 		$absen = $this->db->get_where('presents', ['user_id' => $this->session->userdata('id_users'), 'date' => $today])->row_array();
 		if($this->input->post('tipe')=='M' && !empty($absen['time'])) {
-			$this->session->set_flashdata('salah', 'Anda sudah melakukan absen masuk hari ini');
+			$this->session->set_flashdata('salah', 'Anda sudah melakukan presensi masuk hari ini');
 			redirect(base_url('auth/absen_in_auth'));
 		} elseif ($this->input->post('tipe')=='P' && !empty($absen['time_pulang'])) {
-			$this->session->set_flashdata('salah', 'Anda sudah melakukan absen pulang hari ini');
+			$this->session->set_flashdata('salah', 'Anda sudah melakukan presensi pulang hari ini');
 			redirect(base_url('auth/absen_in_auth'));
 		} elseif ($this->input->post('tipe')=='M' && $time <= $masuk['start'] ) {
-			$this->session->set_flashdata('salah', 'Belum saatnya absensi');
+			$this->session->set_flashdata('salah', 'Belum saatnya presensi');
 			redirect(base_url('auth/absen_in_auth'));
 		} elseif ($this->input->post('tipe')=='M' && $time >= $masuk['finish'] ) {
-			$this->session->set_flashdata('salah', 'Belum saatnya absensi');
+			date_default_timezone_set('Asia/Jakarta');
+			$data = [
+				'user_id'		=> $this->input->post('qrcode'),
+				'date'			=> date('Y-m-d'),
+				'time'			=> date('H:i:s'),
+				'time_pulang'	=> null,
+				'information'	=> 'T',
+				'status'		=> 0,
+				'latitude'		=> $this->input->post('latNow'),
+				'longitude'		=> $this->input->post('lngNow')
+
+			];
+
+			$this->user->insertEntri($data);
+			$this->session->set_flashdata('message', 'Entri presensi berhasil. Silahkan tunggu konfirmasi oleh administator.');
 			redirect(base_url('auth/absen_in_auth'));
 		} elseif ($this->input->post('tipe')=='P' && $time <= $pulang['start'] ) {
-			$this->session->set_flashdata('salah', 'Belum saatnya absensi');
+			$this->session->set_flashdata('salah', 'Belum saatnya presensi');
 			redirect(base_url('auth/absen_in_auth'));
 		} elseif ($this->input->post('tipe')=='P' && $time >= $pulang['finish'] ) {
-			$this->session->set_flashdata('salah', 'Belum saatnya absensi');
+			$this->session->set_flashdata('salah', 'Belum saatnya presensi');
 			redirect(base_url('auth/absen_in_auth'));
 		} elseif ($this->input->post('tipe')=='M' && empty($absen['time'])) {
 			date_default_timezone_set('Asia/Jakarta');
@@ -123,7 +137,7 @@ class Auth extends CI_Controller {
 			];
 
 			$this->user->insertEntri($data);
-			$this->session->set_flashdata('message', 'Entri absensi berhasil. Silahkan tunggu konfirmasi oleh administator.');
+			$this->session->set_flashdata('message', 'Entri presensi berhasil. Silahkan tunggu konfirmasi oleh administator.');
 
 			redirect(base_url('auth/absen_in_auth'));
 		} else ($this->input->post('tipe')=='P' && !empty($absen['time']) && empty($absen['time_pulang'])); {
@@ -134,7 +148,7 @@ class Auth extends CI_Controller {
 			];
 
 			$this->user->updateEntri($id, $data, $today);
-			$this->session->set_flashdata('message', 'Entri absensi berhasil. Silahkan tunggu konfirmasi oleh administator.');
+			$this->session->set_flashdata('message', 'Entri presensi berhasil. Silahkan tunggu konfirmasi oleh administator.');
 
 			redirect(base_url('auth/absen_in_auth'));
 		}

@@ -64,7 +64,7 @@
                     <div class="card">
                         <div class="header">
                             <h2>
-                                DATA ABSENSI
+                                DATA PRESENSI
                             </h2>
                             <ul class="header-dropdown m-r--5">
                                 <li class="dropdown">
@@ -127,13 +127,11 @@
                                             <?php elseif($a['information'] == 'S') : ?>
                                                 <div class="label label-danger">Sakit</div>
                                             <?php elseif($a['information'] == 'T') : ?>
-                                                <div class="badge badge-warning">Terlambat</div>
+                                                <div class="label label-warning">Terlambat</div>
                                             <?php endif ?></td>
-                                            <td align="center"><?php if($a['time'] >= date(14,24)){ 
-                                                print '<div class="label label-danger">terlambat</div>'; 
-                                            } else {
-                                                print '<div class="label label-success">tepat waktu</div>';
-                                            }?></td>
+                                            <td align="center"><?php if($a['status'] == 0){print '<div class="label label-default">Menunggu dikonfirmasi...</div>';}
+                                                elseif($a['status'] == 1){print '<div class="label label-success">Dikonfirmasi</div>';}
+                                                else {print '<div class="label label-danger">Ditolak</div>';}?></td>
                                             <td><?= $a['latitude']?>, <?= $a['longitude']?></td>
                                         </tr>
                                         <?php endforeach ?>
@@ -151,7 +149,7 @@
                         <div class="header">
                             <h2>
                                 PETA
-                                <small>Lokasi absensi siswa</small>
+                                <small>Lokasi presensi siswa</small>
                             </h2>
                             <ul class="header-dropdown m-r--5">
                                 <li class="dropdown">
@@ -185,7 +183,17 @@
 		tileSize: 512,
 		zoomOffset: -1
         }).addTo(mymap);
-            L.marker([-6.6898398, 110.705151]).addTo(mymap)
+
+        var LeafIcon = L.Icon.extend({
+		options: {
+            iconSize:     [50, 50],
+			// iconAnchor:   [22, 70],
+			// popupAnchor:  [22, 22]
+		}
+	});
+
+        var greenIcon = new LeafIcon({iconUrl: '<?= base_url('assets/images/logo.png'); ?>'});
+            L.marker([-6.688983324749088, 110.70610105991365], {icon: greenIcon}).addTo(mymap)
             .bindPopup("<b>MA Walisongo Pecangaan Jepara</b><br />").openPopup();
         <?php foreach($absen as $a) : ?>
             L.marker([<?= $a['latitude']?>, <?= $a['longitude']?>]).addTo(mymap)

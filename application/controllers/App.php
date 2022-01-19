@@ -176,7 +176,7 @@ class App extends CI_Controller {
 
 	public function tabel_konfirmasi()
 	{
-		$data['title'] = 'Konfirmasi absensi';
+		$data['title'] = 'Konfirmasi presensi';
 		$position = $this->input->get('position_id');
 		$data['kelas'] = $this->db->get('positions')->result_array();
 		$id = $this->session->userdata('id_users');
@@ -211,7 +211,7 @@ class App extends CI_Controller {
 
 	public function tabel_absensi()
 	{
-		$data['title'] = 'Tabel data absensi';
+		$data['title'] = 'Tabel data presensi';
 		$position = $this->input->get('position_id');
 		$tanggal = $this->input->get('tanggal');
 		$data['kelas'] = $this->db->get('positions')->result_array();
@@ -225,17 +225,22 @@ class App extends CI_Controller {
 
 	public function tabel_rekap()
 	{
-		$data['title'] = 'REKAPITULASI ABSENSI';
+		$data['title'] = 'REKAPITULASI PRESENSI';
 		$position = $this->input->get('position_id');
-		$start = $this->input->get('start');
-		$end = $this->input->get('end');
+		$bulan = $this->input->get('bulan');
+		$tahun = $this->input->get('tahun');
+		if (!empty($bulan && $tahun)) {
+			$data['hari'] = cal_days_in_month(CAL_GREGORIAN, date($bulan), date($tahun));
+		}else {
+			$data['hari'] = 0;
+		}
 		$data['kelas'] = $this->db->get('positions')->result_array();
 		$id = $this->session->userdata('id_users');
 		$user = $this->app->getUser($id);
-		$data['absen'] = $this->app->getRekap($position, $start, $end);
-		$data['url_export'] = 'export_excel?position_id='.$position.'&start='.$start.'&end='.$end;
-		$data['url_exportPDF'] = 'export_pdf?position_id='.$position.'&start='.$start.'&end='.$end;
-		$data['url_exportCetak'] = 'export_cetak?position_id='.$position.'&start='.$start.'&end='.$end;
+		$data['absen'] = $this->app->getRekap($position, $bulan, $tahun);			
+		$data['url_export'] = 'export_excel?position_id='.$position.'&bulan='.$bulan.'&tahun='.$tahun;
+		$data['url_exportPDF'] = 'export_pdf?position_id='.$position.'&bulan='.$bulan.'&tahun='.$tahun;
+		$data['url_exportCetak'] = 'export_cetak?position_id='.$position.'&bulan='.$bulan.'&tahun='.$tahun;
 		$data['user'] = $user;
 		$data['page'] = 'admin/absensi/rekap';
 		$this->load->view('template/template', $data);
@@ -243,8 +248,9 @@ class App extends CI_Controller {
 
 	public function export_excel(){
 		$position = $_GET['position_id'];
-		$start = $_GET['start'];
-		$end = $_GET['end'];
+		$bulan = $_GET['bulan'];
+		$tahun = $_GET['tahun'];
+		$hari = cal_days_in_month(CAL_GREGORIAN, date($bulan), date($tahun));
 		// Load plugin PHPExcel nya
 		include APPPATH.'third_party/PHPExcel/PHPExcel.php';
 		
@@ -287,17 +293,16 @@ class App extends CI_Controller {
 			)
 		);
 
-		$excel->setActiveSheetIndex(0)->setCellValue('A1', "REKAPITULASI DATA ABSENSI SISWA"); // Set kolom A1 dengan tulisan "DATA SISWA"
-		$excel->getActiveSheet()->mergeCells('A1:G1'); // Set Merge Cell pada kolom A1 sampai E1
+		$excel->setActiveSheetIndex(0)->setCellValue('A1', "REKAPITULASI DATA PRESENSI SISWA"); // Set kolom A1 dengan tulisan "DATA SISWA"
+		$excel->getActiveSheet()->mergeCells('A1:I1'); // Set Merge Cell pada kolom A1 sampai E1
 		$excel->getActiveSheet()->getStyle('A1')->getFont()->setBold(TRUE); // Set bold kolom A1
 		$excel->getActiveSheet()->getStyle('A1')->getFont()->setSize(15); // Set font size 15 untuk kolom A1
 		$excel->getActiveSheet()->getStyle('A1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER); // Set text center untuk kolom A1
 		$excel->setActiveSheetIndex(0)->setCellValue('A2', "MA Walisongo Pecangaan Jepara"); // Set kolom A1 dengan tulisan "DATA SISWA"
-		$excel->getActiveSheet()->mergeCells('A2:G2'); // Set Merge Cell pada kolom A1 sampai E1
+		$excel->getActiveSheet()->mergeCells('A2:I2'); // Set Merge Cell pada kolom A1 sampai E1
 		$excel->getActiveSheet()->getStyle('A2')->getFont()->setSize(12); // Set font size 15 untuk kolom A1
-		$excel->getActiveSheet()->getStyle('A2')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER); // Set text center untuk kolom A1
-		$excel->setActiveSheetIndex(0)->setCellValue('A3', "Tanggal : ".$start." s/d ".$end); // Set kolom A1 dengan tulisan "DATA SISWA"
-		$excel->getActiveSheet()->mergeCells('A3:G3'); // Set Merge Cell pada kolom A1 sampai E1
+		$excel->getActiveSheet()->getStyle('A2')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER); // Set text center untuk kolom A1 // Set kolom A1 dengan tulisan "DATA SISWA"
+		$excel->getActiveSheet()->mergeCells('A3:I3'); // Set Merge Cell pada kolom A1 sampai E1
 		$excel->getActiveSheet()->getStyle('A3')->getFont()->setSize(12); // Set font size 15 untuk kolom A1
 		$excel->getActiveSheet()->getStyle('A3')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER); // Set text center untuk kolom A1
 
@@ -309,6 +314,8 @@ class App extends CI_Controller {
 		$excel->setActiveSheetIndex(0)->setCellValue('E6', "HADIR"); // Set kolom E4 dengan tulisan "ALAMAT"
 		$excel->setActiveSheetIndex(0)->setCellValue('F6', "SAKIT"); // Set kolom E4 dengan tulisan "ALAMAT"
 		$excel->setActiveSheetIndex(0)->setCellValue('G6', "IJIN"); // Set kolom E4 dengan tulisan "ALAMAT"
+		$excel->setActiveSheetIndex(0)->setCellValue('H6', "TERLAMBAT"); // Set kolom E4 dengan tulisan "ALAMAT"
+		$excel->setActiveSheetIndex(0)->setCellValue('I6', "TANPA KETERANGAN"); // Set kolom E4 dengan tulisan "ALAMAT"
 
 		// Apply style header yang telah kita buat tadi ke masing-masing kolom header
 		$excel->getActiveSheet()->getStyle('A6')->applyFromArray($style_col);
@@ -318,10 +325,12 @@ class App extends CI_Controller {
 		$excel->getActiveSheet()->getStyle('E6')->applyFromArray($style_col);
 		$excel->getActiveSheet()->getStyle('F6')->applyFromArray($style_col);
 		$excel->getActiveSheet()->getStyle('G6')->applyFromArray($style_col);
+		$excel->getActiveSheet()->getStyle('H6')->applyFromArray($style_col);
+		$excel->getActiveSheet()->getStyle('I6')->applyFromArray($style_col);
 
 		// Panggil function view yang ada di SiswaModel untuk menampilkan semua data siswanya
 		
-		$siswa = $this->app->exportExcel($position, $start, $end);
+		$siswa = $this->app->exportExcel($position, $bulan, $tahun);
 
 		$no = 1; // Untuk penomoran tabel, di awal set dengan 1
 		$numrow = 7; // Set baris pertama untuk isi tabel adalah baris ke 4
@@ -333,6 +342,8 @@ class App extends CI_Controller {
 			$excel->setActiveSheetIndex(0)->setCellValue('E'.$numrow, $data['masuk']);
 			$excel->setActiveSheetIndex(0)->setCellValue('F'.$numrow, $data['sakit']);
 			$excel->setActiveSheetIndex(0)->setCellValue('G'.$numrow, $data['ijin']);
+			$excel->setActiveSheetIndex(0)->setCellValue('H'.$numrow, $data['terlambat']);
+			$excel->setActiveSheetIndex(0)->setCellValue('I'.$numrow, ($hari-4)-($data['masuk']-$data['terlambat'])-$data['sakit']-$data['ijin']);
 			
 			// Apply style row yang telah kita buat tadi ke masing-masing baris (isi tabel)
 			$excel->getActiveSheet()->getStyle('A'.$numrow)->applyFromArray($style_row);
@@ -342,6 +353,8 @@ class App extends CI_Controller {
 			$excel->getActiveSheet()->getStyle('E'.$numrow)->applyFromArray($style_row);
 			$excel->getActiveSheet()->getStyle('F'.$numrow)->applyFromArray($style_row);
 			$excel->getActiveSheet()->getStyle('G'.$numrow)->applyFromArray($style_row);
+			$excel->getActiveSheet()->getStyle('H'.$numrow)->applyFromArray($style_row);
+			$excel->getActiveSheet()->getStyle('I'.$numrow)->applyFromArray($style_row);
 			
 			$no++; // Tambah 1 setiap kali looping
 			$numrow++; // Tambah 1 setiap kali looping
@@ -355,6 +368,8 @@ class App extends CI_Controller {
 		$excel->getActiveSheet()->getColumnDimension('E')->setWidth(15); // Set width kolom E
 		$excel->getActiveSheet()->getColumnDimension('F')->setWidth(15); // Set width kolom E
 		$excel->getActiveSheet()->getColumnDimension('G')->setWidth(15); // Set width kolom E
+		$excel->getActiveSheet()->getColumnDimension('H')->setWidth(15); // Set width kolom E
+		$excel->getActiveSheet()->getColumnDimension('I')->setWidth(15); // Set width kolom E
 		
 		// Set height semua kolom menjadi auto (mengikuti height isi dari kolommnya, jadi otomatis)
 		$excel->getActiveSheet()->getDefaultRowDimension()->setRowHeight(-1);
@@ -378,19 +393,25 @@ class App extends CI_Controller {
 	public function export_pdf()
 	{
 		$position = $_GET['position_id'];
-		$start = $_GET['start'];
-		$end = $_GET['end'];
+		$bulan = $_GET['bulan'];
+		$tahun = $_GET['tahun'];
 		$data['title'] = 'Ekspor PDF';
-		$data['absen'] = $this->app->exportPDF($position, $start, $end);
+		$data['hari'] = cal_days_in_month(CAL_GREGORIAN, date($bulan), date($tahun));
+		$data['absen'] = $this->app->exportPDF($position, $bulan, $tahun);
 		$this->load->view('admin/absensi/printpdf', $data);
 	}
 
 	public function export_cetak()
 	{
 		$position = $_GET['position_id'];
-		$start = $_GET['start'];
-		$end = $_GET['end'];
-		$data['absen'] = $this->app->exportCetak($position, $start, $end);
+		$bulan = $_GET['bulan'];
+		$tahun = $_GET['tahun'];
+		if (!empty($bulan && $tahun)) {
+			$data['hari'] = cal_days_in_month(CAL_GREGORIAN, date($bulan), date($tahun));
+		}else {
+			$data['hari'] = 0;
+		}
+		$data['absen'] = $this->app->exportCetak($position, $bulan, $tahun);
 		$this->load->view('admin/absensi/cetak', $data);
 	}
 
