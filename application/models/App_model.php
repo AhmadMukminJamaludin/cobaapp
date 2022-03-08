@@ -183,7 +183,7 @@ class App_model extends CI_Model {
         $this->db->select('positions.*, users.position_id');
         $this->db->from('positions');
         $this->db->join('users', 'users.position_id = positions.id_positions');
-      return $this->db->get()->result_array();
+        return $this->db->get()->result_array();
     }
 
     public function getRekap($position, $bulan, $tahun)

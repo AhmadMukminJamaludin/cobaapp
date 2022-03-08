@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 13 Nov 2021 pada 12.11
+-- Waktu pembuatan: 30 Jan 2022 pada 23.56
 -- Versi server: 10.4.8-MariaDB
 -- Versi PHP: 7.2.24
 
@@ -40,7 +40,8 @@ CREATE TABLE `pengumuman` (
 --
 
 INSERT INTO `pengumuman` (`id_pengumuman`, `tanggal`, `jam`, `pengumuman`) VALUES
-(6, '2021-11-12', '22:55:27', 'Selamat datang di AbsensiAPP, sebuah aplikasi berbasis web untuk memudahkan pekerjaan anda :)');
+(6, '2022-01-10', '18:38:01', 'Selamat datang di PresensiAPP, sebuah aplikasi berbasis web untuk memudahkan pekerjaan anda :)'),
+(8, '2022-01-19', '10:25:02', 'Selamat Datang di PresensiAPP aplikasi presensi siswa');
 
 -- --------------------------------------------------------
 
@@ -62,7 +63,7 @@ INSERT INTO `positions` (`id_positions`, `position_name`) VALUES
 (2, 'XII MIPA 2'),
 (3, 'XII MIPA 1'),
 (4, 'XI MIPA'),
-(8, 'X MIPA');
+(8, 'X IPA');
 
 -- --------------------------------------------------------
 
@@ -107,7 +108,60 @@ INSERT INTO `presents` (`id_presents`, `user_id`, `date`, `time`, `time_pulang`,
 (46, 6, '2021-11-09', '20:11:10', '20:14:50', 'M', 1, '', '', '-7.0051453', '110.4381254'),
 (47, 47, '2021-11-10', '15:47:12', '15:47:26', 'M', 1, '', '', '-7.0051453', '110.4381254'),
 (48, 6, '2021-11-11', '12:14:51', '12:15:09', 'M', 1, '', '', '-7.0051453', '110.4381254'),
-(49, 12, '2021-11-11', '19:08:21', NULL, 'S', 1, 'sakit', 'bukti_bayar.pdf', '-7.0051453', '110.4381254');
+(49, 12, '2021-11-11', '19:08:21', NULL, 'S', 1, 'sakit', 'bukti_bayar.pdf', '-7.0051453', '110.4381254'),
+(50, 6, '2021-11-14', '12:03:10', '13:00:46', 'M', 2, '', '', '-7.0051453', '110.4381254'),
+(51, 6, '2021-11-14', '12:03:23', '13:00:46', 'M', 2, '', '', '-7.0051453', '110.4381254'),
+(52, 6, '2021-11-14', '12:05:53', '13:00:46', 'M', 1, '', '', '-7.0051453', '110.4381254'),
+(53, 47, '2021-11-14', '19:33:50', '19:35:58', 'M', 1, '', '', '-7.0051453', '110.4381254'),
+(54, 183, '2021-11-14', '19:41:58', '20:07:55', 'M', 1, '', '', '-7.0051453', '110.4381254'),
+(55, 47, '2021-12-04', '13:23:31', NULL, 'M', 1, '', '', '-7.0051453', '110.4381254'),
+(56, 6, '2021-12-09', '04:41:24', NULL, 'M', 1, '', '', '-7.0051453', '110.4381254'),
+(57, 81, '2021-12-09', '04:51:22', NULL, 'S', 1, 'Sakit', 'ACC-FPPS-G_111_18_0014.pdf', '-6.9861376\r\n', '110.4379904'),
+(58, 47, '2021-12-09', '04:59:49', NULL, 'M', 1, '', '', '-7.0051453', '110.4381254'),
+(59, 47, '2022-01-05', '10:53:59', '15:31:32', 'T', 1, '', '', '-7.2574719', '112.7520883'),
+(60, 12, '2022-01-05', '11:38:23', NULL, 'T', 1, '', '', '-6.677225500889958', '110.70273786053286'),
+(61, 6, '2021-09-01', '06:00:00', '14:00:00', 'M', 1, '', '', '-6.688307180118884', '110.68809187194506'),
+(62, 81, '2021-09-01', '06:00:00', '14:00:00', 'M', 1, '', '', '-6.681232163719412', '110.6907252825576'),
+(63, 82, '2021-09-01', '06:00:00', '14:00:00', 'M', 1, '', '', '-6.677225500889958', '110.70273786053286'),
+(64, 83, '2021-09-01', '06:00:00', '14:00:00', 'M', 1, '', '', '-6.669190764373402', '110.6828527537774'),
+(65, 84, '2021-09-01', '06:00:00', '14:00:00', 'M', 1, '', '', '-6.677800927888376', '110.73073145742161'),
+(66, 85, '2021-09-01', '06:00:00', '14:00:00', 'M', 1, '', '', '-6.702309226720381', '110.71417126064145'),
+(67, 86, '2021-09-01', '06:00:00', '14:00:00', 'M', 1, '', '', '-6.6798042610486235', '110.74446011796479'),
+(68, 87, '2021-09-01', '06:00:00', '14:00:00', 'M', 1, '', '', '-6.705037030831301', '110.74557557163389'),
+(69, 88, '2021-09-01', '06:00:00', '14:00:00', 'M', 1, '', '', '-6.711963027346387', '110.69374987808352'),
+(70, 89, '2021-09-01', '06:00:00', '14:00:00', 'M', 1, '', '', '-6.716075957116894', '110.6762672869231'),
+(71, 90, '2021-09-01', '06:00:00', '14:00:00', 'M', 1, '', '', '-6.71345476754939', '110.6504616953084'),
+(72, 91, '2021-09-01', '06:00:00', '14:00:00', 'M', 1, '', '', '-6.68547322319062', '110.67435814506632'),
+(73, 92, '2021-09-01', '06:00:00', '14:00:00', 'M', 1, '', '', '-6.6551030171872405', '110.73094596774264'),
+(74, 93, '2021-09-01', '06:00:00', '14:00:00', 'M', 1, '', '', '-6.670618698000707', '110.66805154162928'),
+(75, 94, '2021-09-01', '06:00:00', '14:00:00', 'M', 1, '', '', '-6.702373159803914', '110.7017725640884'),
+(76, 95, '2021-09-01', '06:00:00', '14:00:00', 'M', 1, '', '', '-6.70326822209298', '110.73555793964381'),
+(92, 47, '2022-01-06', '12:24:58', NULL, 'T', 1, '', '', '-6.6970067', '110.7130027'),
+(93, 47, '2022-01-18', '20:24:58', NULL, 'T', 1, '', '', '-7.2574719', '112.7520883'),
+(94, 47, '2022-01-19', '08:00:14', NULL, 'T', 1, '', '', '-7.2574719', '112.7520883'),
+(95, 81, '2022-01-19', '09:34:58', NULL, 'S', 1, 'sakit flu', 'azhar.pdf', '-7.0051453', '110.4381254'),
+(96, 149, '2022-01-19', '10:26:48', NULL, 'T', 1, '', '', '-7.0051453', '110.4381254'),
+(97, 12, '2022-01-19', '10:27:11', NULL, 'T', 1, '', '', '-7.0051453', '110.4381254'),
+(98, 150, '2022-01-19', '10:27:28', NULL, 'T', 1, '', '', '-7.0051453', '110.4381254');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `roles`
+--
+
+CREATE TABLE `roles` (
+  `id_role` int(1) NOT NULL,
+  `name_role` varchar(30) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `roles`
+--
+
+INSERT INTO `roles` (`id_role`, `name_role`) VALUES
+(1, 'admin'),
+(2, 'user');
 
 -- --------------------------------------------------------
 
@@ -127,8 +181,8 @@ CREATE TABLE `time` (
 --
 
 INSERT INTO `time` (`id_time`, `start`, `finish`, `keterangan`) VALUES
-(1, '06:00', '07:40', 'Masuk'),
-(2, '14:00', '16:00', 'Pulang');
+(1, '04:00', '08:00', 'Masuk'),
+(2, '14:00', '23:00', 'Pulang');
 
 -- --------------------------------------------------------
 
@@ -154,9 +208,9 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id_users`, `nisn`, `username`, `email`, `password`, `alamat`, `gender`, `photo`, `role_id`, `position_id`) VALUES
-(1, '', 'Ahmad Mukmin Jamaludin', 'jcfirda@gmail.com', '$2y$10$Qjfox2wsInCd5wwb/..4kuTyiwZ7quWnKtZE1DrKcduslcIVm8v1G', 'pulodarat', 'L', 'f9049b635d598786c3aebcdd9bf75f04.jpg', 1, 0),
+(1, '', 'Jamaludin', 'jcfirda@gmail.com', '$2y$10$0m7G.LMimWH/lYDLDpclS.bjPagoDHe6B9RKANvginlhGMj9BPGUK', 'pulodarat ', 'L', 'f9049b635d598786c3aebcdd9bf75f04.jpg', 1, 0),
 (6, '3454', 'Afsheena Farzana Putri', 'shena@gmail.com', '$2y$10$Fkve2eFSgGJ26ntE0h5cpeTuFh9gRZMSniyPuDuf1I2HttmRz2nGq', 'Pulodarat', 'P', 'adab212cca3da9ca4d6d5ec172f2ca62.png', 2, 3),
-(12, '6364', 'Afwah Mumtazah', '6364@gmail.com', '$2y$10$88A1Vys1W4q7GfJJvacrY.J3BkkL/sWc9I.Bg1mzaXqK2ORDUM/OS', 'Pulodarat', 'P', '', 2, 1),
+(12, '6364', 'Afwah Mumtazah', '6364@gmail.com', '$2y$10$88A1Vys1W4q7GfJJvacrY.J3BkkL/sWc9I.Bg1mzaXqK2ORDUM/OS', 'erere', 'P', '', 2, 1),
 (13, '131233200002200001', 'Adinda Maulida', '131233200002200001@gmail.com', '$2y$10$88A1Vys1W4q7GfJJvacrY.J3BkkL/sWc9I.Bg1mzaXqK2ORDUM/OS', '', 'L', '', 2, 8),
 (14, '131233200002200002', 'Alya Alawiyah', '131233200002200002@gmail.com', '$2y$10$88A1Vys1W4q7GfJJvacrY.J3BkkL/sWc9I.Bg1mzaXqK2ORDUM/OS', '', 'L', '', 2, 8),
 (15, '131233200002200003', 'Ananda Maullana Aditya', '131233200002200003@gmail.com', '$2y$10$88A1Vys1W4q7GfJJvacrY.J3BkkL/sWc9I.Bg1mzaXqK2ORDUM/OS', '', 'L', '', 2, 8),
@@ -191,7 +245,7 @@ INSERT INTO `users` (`id_users`, `nisn`, `username`, `email`, `password`, `alama
 (44, '131233200002200032', 'Tia Fajriyah Ananta', '131233200002200032@gmail.com', '$2y$10$88A1Vys1W4q7GfJJvacrY.J3BkkL/sWc9I.Bg1mzaXqK2ORDUM/OS', '', 'L', '', 2, 8),
 (45, '131233200002200034', 'Najwan Fikri ', '131233200002200034@gmail.com', '$2y$10$88A1Vys1W4q7GfJJvacrY.J3BkkL/sWc9I.Bg1mzaXqK2ORDUM/OS', '', 'L', '', 2, 8),
 (46, '131233200002200035', 'Azda Avin Najwa', '131233200002200035@gmail.com', '$2y$10$88A1Vys1W4q7GfJJvacrY.J3BkkL/sWc9I.Bg1mzaXqK2ORDUM/OS', '', 'L', '', 2, 8),
-(47, '6428', 'Abdullah Al Faruq', '6428@gmail.com', '$2y$10$88A1Vys1W4q7GfJJvacrY.J3BkkL/sWc9I.Bg1mzaXqK2ORDUM/OS', '', 'L', '', 2, 4),
+(47, '6428', 'Abdullah Al Jamal', '6428@gmail.com', '$2y$10$88A1Vys1W4q7GfJJvacrY.J3BkkL/sWc9I.Bg1mzaXqK2ORDUM/OS', 'Keling donorojo', 'L', '', 2, 4),
 (48, '6434', 'Ade Ulyaningtiyas', '6434@gmail.com', '$2y$10$88A1Vys1W4q7GfJJvacrY.J3BkkL/sWc9I.Bg1mzaXqK2ORDUM/OS', '', 'L', '', 2, 4),
 (49, '6395', 'Alfina Darajatul `Ula', '6395@gmail.com', '$2y$10$88A1Vys1W4q7GfJJvacrY.J3BkkL/sWc9I.Bg1mzaXqK2ORDUM/OS', '', 'L', '', 2, 4),
 (50, '6396', 'Amelia Putri', '6396@gmail.com', '$2y$10$88A1Vys1W4q7GfJJvacrY.J3BkkL/sWc9I.Bg1mzaXqK2ORDUM/OS', '', 'L', '', 2, 4),
@@ -278,7 +332,9 @@ INSERT INTO `users` (`id_users`, `nisn`, `username`, `email`, `password`, `alama
 (164, '6387', 'Supriyanto', '6387@gmail.com', '$2y$10$88A1Vys1W4q7GfJJvacrY.J3BkkL/sWc9I.Bg1mzaXqK2ORDUM/OS', '', 'L', '', 2, 1),
 (165, '6388', 'Wahyu Adi Saputra', '6388@gmail.com', '$2y$10$88A1Vys1W4q7GfJJvacrY.J3BkkL/sWc9I.Bg1mzaXqK2ORDUM/OS', '', 'L', '', 2, 1),
 (166, '6389', 'Wahyu Nur Widianti', '6389@gmail.com', '$2y$10$88A1Vys1W4q7GfJJvacrY.J3BkkL/sWc9I.Bg1mzaXqK2ORDUM/OS', '', 'L', '', 2, 1),
-(167, '6390', 'Zeni Nur Isnaini', '6390@gmail.com', '$2y$10$88A1Vys1W4q7GfJJvacrY.J3BkkL/sWc9I.Bg1mzaXqK2ORDUM/OS', '', 'L', '', 2, 1);
+(167, '6390', 'Zeni Nur Isnaini', '6390@gmail.com', '$2y$10$88A1Vys1W4q7GfJJvacrY.J3BkkL/sWc9I.Bg1mzaXqK2ORDUM/OS', '', 'L', '', 2, 1),
+(183, '1234', 'Supardiono', 'supardiono@gmail.com', '$2y$10$6d54sTXTpBZhMVp9/2u70.ZppHR1wFIxNXLodT4GEq9Cj.ASdvIjG', 'Geneng', 'L', '', 2, 8),
+(187, '5672', 'Wahid Zainuri Ahmad ', 'wahid@gmail.com', '$2y$10$5iv5DxpmLh2kOTWfzJAraOtvJGpDeZUX6CvCOLjRC0K0ftip7OPgq', 'Kaligawe', 'L', '', 2, 8);
 
 --
 -- Indexes for dumped tables
@@ -303,6 +359,12 @@ ALTER TABLE `presents`
   ADD PRIMARY KEY (`id_presents`);
 
 --
+-- Indeks untuk tabel `roles`
+--
+ALTER TABLE `roles`
+  ADD PRIMARY KEY (`id_role`);
+
+--
 -- Indeks untuk tabel `time`
 --
 ALTER TABLE `time`
@@ -322,19 +384,25 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT untuk tabel `pengumuman`
 --
 ALTER TABLE `pengumuman`
-  MODIFY `id_pengumuman` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_pengumuman` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT untuk tabel `positions`
 --
 ALTER TABLE `positions`
-  MODIFY `id_positions` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id_positions` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT untuk tabel `presents`
 --
 ALTER TABLE `presents`
-  MODIFY `id_presents` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
+  MODIFY `id_presents` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=99;
+
+--
+-- AUTO_INCREMENT untuk tabel `roles`
+--
+ALTER TABLE `roles`
+  MODIFY `id_role` int(1) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT untuk tabel `time`
@@ -346,7 +414,7 @@ ALTER TABLE `time`
 -- AUTO_INCREMENT untuk tabel `users`
 --
 ALTER TABLE `users`
-  MODIFY `id_users` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=183;
+  MODIFY `id_users` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=188;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
